@@ -20,6 +20,8 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             LogicalLocationsDictionary = new Dictionary<string, IList<LogicalLocationComponent>>();
         }
 
+        public abstract string ToolFormat { get; }
+
         public abstract void Convert(Stream input, IResultLogWriter output);
 
         // internal as well as protected it can be exercised by unit tests.

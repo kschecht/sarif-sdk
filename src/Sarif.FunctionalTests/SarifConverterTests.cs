@@ -26,41 +26,41 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
         [Fact]
         public void AndroidStudioConverter_EndToEnd()
         {
-            BatchRunConverter(ToolFormat.AndroidStudio);
+            BatchRunConverter("AndroidStudio");
         }
 
         [Fact]
         public void ClangAnalyzerConverter_EndToEnd()
         {
-            BatchRunConverter(ToolFormat.ClangAnalyzer);
+            BatchRunConverter("ClangAnalyzer");
         }
 
         [Fact]
         public void CppCheckConverter_EndToEnd()
         {
-            BatchRunConverter(ToolFormat.CppCheck);
+            BatchRunConverter("CppCheck");
         }
 
         [Fact]
         public void FortifyConverter_EndToEnd()
         {
-            BatchRunConverter(ToolFormat.Fortify);
+            BatchRunConverter("Fortify");
         }
 
         [Fact]
         public void FxCopConverter_EndToEnd()
         {
-            BatchRunConverter(ToolFormat.FxCop);
+            BatchRunConverter("FxCop");
         }
 
         private readonly ToolFormatConverter converter = new ToolFormatConverter();
 
-        private void BatchRunConverter(ToolFormat tool)
+        private void BatchRunConverter(string tool)
         {
             BatchRunConverter(tool, "*.xml");
         }
 
-        private void BatchRunConverter(ToolFormat tool, string inputFilter)
+        private void BatchRunConverter(string tool, string inputFilter)
         {
             var sb = new StringBuilder();
 
@@ -85,7 +85,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             return sb.ToString();
         }
 
-        private void RunConverter(StringBuilder sb, ToolFormat tool, string inputFileName)
+        private void RunConverter(StringBuilder sb, string tool, string inputFileName)
         {
             string expectedFileName = inputFileName + ".sarif";
             string generatedFileName = inputFileName + ".actual.sarif";

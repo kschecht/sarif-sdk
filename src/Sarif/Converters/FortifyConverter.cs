@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,7 @@ using Microsoft.CodeAnalysis.Sarif.Writers;
 
 namespace Microsoft.CodeAnalysis.Sarif.Converters
 {
+    [Export(typeof(IToolFileConverter))]
     internal class FortifyConverter : IToolFileConverter
     {
         private readonly NameTable _nameTable;
@@ -23,6 +25,14 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
         {
             _nameTable = new NameTable();
             _strings = new FortifyStrings(_nameTable);
+        }
+
+        public string ToolFormat
+        {
+            get
+            {
+                return "Fortify";
+            }
         }
 
         /// <summary>

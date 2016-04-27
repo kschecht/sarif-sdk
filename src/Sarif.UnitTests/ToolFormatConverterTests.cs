@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.Sarif
         {
             string input = Path.GetTempFileName();
             string directory = Environment.CurrentDirectory;
-            _converter.ConvertToStandardFormat(ToolFormat.AndroidStudio, input, directory);
+            _converter.ConvertToStandardFormat("AndroidStudio", input, directory);
         }
 
         [TestMethod]
@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Sarif
         public void ToolFormatConverter_ConvertToStandardFormat_NullInputFile()
         {
             string file = Path.GetTempFileName();
-            _converter.ConvertToStandardFormat(ToolFormat.AndroidStudio, null, file);
+            _converter.ConvertToStandardFormat("AndroidStudio", null, file);
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.Sarif
         public void ToolFormatConverter_ConvertToStandardFormat_NullOutputFile()
         {
             string file = Path.GetTempFileName();
-            _converter.ConvertToStandardFormat(ToolFormat.AndroidStudio, file, null);
+            _converter.ConvertToStandardFormat("AndroidStudio", file, null);
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.Sarif
         public void ToolFormatConverter_ConvertToStandardFormat_NullInputStream()
         {
             var output = new ResultLogObjectWriter();
-            _converter.ConvertToStandardFormat(ToolFormat.AndroidStudio, null, output);
+            _converter.ConvertToStandardFormat("AndroidStudio", null, output);
         }
 
         [TestMethod]
@@ -54,7 +54,7 @@ namespace Microsoft.CodeAnalysis.Sarif
         {
             using (var stream = new MemoryStream())
             {
-                _converter.ConvertToStandardFormat(ToolFormat.AndroidStudio, stream, null);
+                _converter.ConvertToStandardFormat("AndroidStudio", stream, null);
             }
         }
         [TestMethod]
@@ -64,7 +64,7 @@ namespace Microsoft.CodeAnalysis.Sarif
             var output = new ResultLogObjectWriter();
             using (var input = new MemoryStream())
             {
-                _converter.ConvertToStandardFormat(0, input, output);
+                _converter.ConvertToStandardFormat("DoesNotExist", input, output);
             }
         }
 
@@ -74,7 +74,7 @@ namespace Microsoft.CodeAnalysis.Sarif
         {
             string file = this.GetType().Assembly.Location;
             string doesNotExist = Guid.NewGuid().ToString();
-            _converter.ConvertToStandardFormat(ToolFormat.AndroidStudio, doesNotExist, file, ToolFormatConversionOptions.OverwriteExistingOutputFile);
+            _converter.ConvertToStandardFormat("AndroidStudio", doesNotExist, file, ToolFormatConversionOptions.OverwriteExistingOutputFile);
         }
 
         [TestMethod]
@@ -82,7 +82,7 @@ namespace Microsoft.CodeAnalysis.Sarif
         public void ToolFormatConverter_ConvertToStandardFormat_OutputExistsAndOverwriteNotSpecified()
         {
             string exists = this.GetType().Assembly.Location;
-            _converter.ConvertToStandardFormat(ToolFormat.AndroidStudio, exists, exists);
+            _converter.ConvertToStandardFormat("AndroidStudio", exists, exists);
         }
 
         [TestMethod]
@@ -99,11 +99,11 @@ namespace Microsoft.CodeAnalysis.Sarif
             {
                 var inputFileName = tempDir.Write("input.xml", emptyCppCheckLog);
                 var expectedOutputFileName = tempDir.Combine("output_expected.xml");
-                _converter.ConvertToStandardFormat(ToolFormat.CppCheck, inputFileName, expectedOutputFileName);
+                _converter.ConvertToStandardFormat("CppCheck", inputFileName, expectedOutputFileName);
 
                 string expectedOutput = File.ReadAllText(expectedOutputFileName, Encoding.UTF8);
                 var actualOutputFileName = tempDir.Write("output_actual.xml", new string('a', expectedOutput.Length + 4096));
-                _converter.ConvertToStandardFormat(ToolFormat.CppCheck, inputFileName, actualOutputFileName, ToolFormatConversionOptions.OverwriteExistingOutputFile);
+                _converter.ConvertToStandardFormat("CppCheck", inputFileName, actualOutputFileName, ToolFormatConversionOptions.OverwriteExistingOutputFile);
                 string actualOutput = File.ReadAllText(actualOutputFileName, Encoding.UTF8);
                 Assert.AreEqual(expectedOutput, actualOutput);
             }

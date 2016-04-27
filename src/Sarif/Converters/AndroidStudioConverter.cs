@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Composition;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
     /// <summary>
     /// Converts an xml log file of the Android Studio format into the SARIF format
     /// </summary>
+    [Export(typeof(IToolFileConverter))]
     internal class AndroidStudioConverter : ToolFileConverterBase
     {
         private readonly NameTable _nameTable;
@@ -29,6 +31,14 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
         {
             _nameTable = new NameTable();
             _strings = new AndroidStudioStrings(_nameTable);
+        }
+
+        public override string ToolFormat
+        {
+            get
+            {
+                return "AndroidStudio";
+            }
         }
 
         /// <summary>

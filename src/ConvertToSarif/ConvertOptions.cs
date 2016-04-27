@@ -3,6 +3,7 @@
 
 
 using CommandLine;
+using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Sarif.ConvertToSarif
 {
@@ -17,7 +18,15 @@ namespace Microsoft.CodeAnalysis.Sarif.ConvertToSarif
             't',
             "tool",
             HelpText = "The tool format of the input file.")]
-        public ToolFormat ToolFormat { get; internal set; }
+        public string ToolFormat { get; internal set; }
+
+        [Option(
+            'c',
+            "converters",
+            Required = false,
+            HelpText = "Path to a plug-in file which contains the SARIF log file converter.",
+            Default = ".\\Sarif.dll")]
+        public string ConverterFilePath { get; set; }
 
         [Option(
             'o',

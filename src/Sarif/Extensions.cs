@@ -210,5 +210,18 @@ namespace Microsoft.CodeAnalysis.Sarif
                 StartLine = startLine
             };
         }
+
+        /// <summary>
+        /// Creates a new <see cref="PhysicalLocation"/> given a path.
+        /// </summary>
+        /// <param name="component">The path for which a <see cref="PhysicalLocation"/> shall be created.</param>
+        /// <returns>A <see cref="PhysicalLocation"/> with the URI and Mime-Type members filled out.</returns>
+        internal static PhysicalLocation CreatePhysicalLocation(string component)
+        {
+            return new PhysicalLocation
+            {
+                Uri = new Uri(component, UriKind.RelativeOrAbsolute),
+            };
+        }
     }
 }

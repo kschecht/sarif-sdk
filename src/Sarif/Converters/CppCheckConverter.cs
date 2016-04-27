@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.IO;
 using System.Xml;
 using Microsoft.CodeAnalysis.Sarif.Driver;
@@ -11,6 +12,7 @@ using Microsoft.CodeAnalysis.Sarif.Writers;
 
 namespace Microsoft.CodeAnalysis.Sarif.Converters
 {
+    [Export(typeof(IToolFileConverter))]
     internal class CppCheckConverter : IToolFileConverter
     {
         private readonly NameTable _nameTable;
@@ -21,6 +23,14 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
         {
             _nameTable = new NameTable();
             _strings = new CppCheckStrings(_nameTable);
+        }
+
+        public string ToolFormat
+        {
+            get
+            {
+                return "CppCheck";
+            }
         }
 
         /// <summary>

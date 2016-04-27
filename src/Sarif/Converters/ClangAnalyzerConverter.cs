@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.IO;
 using System.Xml;
 using Microsoft.CodeAnalysis.Sarif.Sdk;
@@ -10,9 +11,18 @@ using Microsoft.CodeAnalysis.Sarif.Writers;
 
 namespace Microsoft.CodeAnalysis.Sarif.Converters
 {
+    [Export(typeof(IToolFileConverter))]
     internal class ClangAnalyzerConverter : IToolFileConverter
     {
         private IList<object> _files = null;
+
+        public string ToolFormat
+        {
+            get
+            {
+                return "ClangAnalyzer";
+            }
+        }
 
         /// <summary>Convert a Clang plist report into the SARIF format.</summary>
         /// <exception cref="ArgumentNullException">Thrown when one or more required arguments are null.</exception>

@@ -5,8 +5,9 @@ using System.IO;
 
 namespace Microsoft.CodeAnalysis.Sarif
 {
-    internal interface IToolFileConverter
+    public interface IToolFileConverter
     {
+        string ToolFormat { get; }
         void Convert(Stream input, IResultLogWriter output);
     }
 }

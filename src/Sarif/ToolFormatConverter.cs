@@ -1,14 +1,16 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading;
-using Newtonsoft.Json;
 using Microsoft.CodeAnalysis.Sarif.Converters;
 using Microsoft.CodeAnalysis.Sarif.Writers;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Microsoft.CodeAnalysis.Sarif
 {
@@ -18,6 +20,16 @@ namespace Microsoft.CodeAnalysis.Sarif
     /// </summary>
     public class ToolFormatConverter
     {
+        public ToolFormatConverter() 
+            : this(typeof(ToolFormatConverter).Assembly)
+        {
+        }
+
+        public ToolFormatConverter(Assembly converterAssembly)
+        {
+            this.Converters = CreateConverterRecords(converterAssembly);
+        }
+
         /// <summary>Converts a tool log file into the SARIF format.</summary>
         /// <exception cref="ArgumentNullException">Thrown when one or more required arguments are null.</exception>
         /// <exception cref="ArgumentException">Thrown when one or more arguments have unsupported or
@@ -29,12 +41,12 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// written. This cannot be a directory.</param>
         /// <param name="conversionOptions">Options for controlling the conversion.</param>
         public void ConvertToStandardFormat(
-            ToolFormat toolFormat,
+            string toolFormat,
             string inputFileName,
             string outputFileName,
             ToolFormatConversionOptions conversionOptions)
         {
-            if (toolFormat == ToolFormat.PREfast)
+            if (toolFormat.Equals("PREfast", StringComparison.OrdinalIgnoreCase))
             {
                 string sarif = ConvertPREfastToStandardFormat(inputFileName);
                 File.WriteAllText(outputFileName, sarif);
@@ -78,11 +90,11 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// <param name="outputFileName">The name of the file to which the resulting SARIF log shall be
         /// written. This cannot be a directory.</param>
         public void ConvertToStandardFormat(
-            ToolFormat toolFormat,
+            string toolFormat,
             string inputFileName,
             string outputFileName)
         {
-            if (toolFormat == ToolFormat.PREfast)
+            if (toolFormat.Equals("PREfast", StringComparison.OrdinalIgnoreCase))
             {
                 string sarif = ConvertPREfastToStandardFormat(inputFileName);
                 File.WriteAllText(outputFileName, sarif);
@@ -100,11 +112,11 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// <param name="inputStream">A stream that contains tool log contents.</param>
         /// <param name="outputStream">A stream to which the converted output should be written.</param>
         public void ConvertToStandardFormat(
-            ToolFormat toolFormat,
+            string toolFormat,
             Stream inputStream,
             IResultLogWriter outputStream)
         {
-            if (toolFormat == ToolFormat.PREfast)
+            if (toolFormat.Equals("PREfast", StringComparison.OrdinalIgnoreCase))
             {
                 throw new ArgumentException("Cannot convert PREfast XML from stream. Call ConvertPREfastToStandardFormat helper instead.");
             };
@@ -112,10 +124,10 @@ namespace Microsoft.CodeAnalysis.Sarif
             if (inputStream == null) { throw new ArgumentNullException("inputStream"); };
             if (outputStream == null) { throw new ArgumentNullException("outputStream"); };
 
-            Lazy<IToolFileConverter> converter;
-            if (_converters.TryGetValue(toolFormat, out converter))
+            IToolFileConverter converter;
+            if (this.Converters.TryGetValue(toolFormat, out converter))
             {
-                converter.Value.Convert(inputStream, outputStream);
+                converter.Convert(inputStream, outputStream);
             }
             else
             {
@@ -123,23 +135,24 @@ namespace Microsoft.CodeAnalysis.Sarif
             }
         }
 
-        private readonly IDictionary<ToolFormat, Lazy<IToolFileConverter>> _converters = CreateConverterRecords();
-
-        private static Dictionary<ToolFormat, Lazy<IToolFileConverter>> CreateConverterRecords()
+        public IImmutableDictionary<string, IToolFileConverter> Converters
         {
-            var result = new Dictionary<ToolFormat, Lazy<IToolFileConverter>>();
-            CreateConverterRecord<AndroidStudioConverter>(result, ToolFormat.AndroidStudio);
-            CreateConverterRecord<CppCheckConverter>(result, ToolFormat.CppCheck);
-            CreateConverterRecord<ClangAnalyzerConverter>(result, ToolFormat.ClangAnalyzer);
-            CreateConverterRecord<FortifyConverter>(result, ToolFormat.Fortify);
-            CreateConverterRecord<FxCopConverter>(result, ToolFormat.FxCop);
-            return result;
+            get;
+            private set;
         }
 
-        private static void CreateConverterRecord<T>(IDictionary<ToolFormat, Lazy<IToolFileConverter>> dict, ToolFormat format)
-            where T : IToolFileConverter, new()
+        private static IImmutableDictionary<string, IToolFileConverter> CreateConverterRecords(Assembly converterAssembly)
         {
-            dict.Add(format, new Lazy<IToolFileConverter>(() => new T(), LazyThreadSafetyMode.ExecutionAndPublication));
+            var result = new Dictionary<string, IToolFileConverter>();
+            ImmutableArray<IToolFileConverter> converters = CompositionUtilities.GetExports<IToolFileConverter>(converterAssembly);
+            var builder = ImmutableDictionary.CreateBuilder<string, IToolFileConverter>();
+
+            foreach (IToolFileConverter converter in converters)
+            {
+                builder.Add(converter.ToolFormat, converter);
+            }
+
+            return builder.ToImmutable();
         }
 
         /// <summary>Converts a legacy PREfast XML log file into the SARIF format.</summary>

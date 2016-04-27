@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using CommandLine;
+using System.Reflection;
 
 namespace Microsoft.CodeAnalysis.Sarif.ConvertToSarif
 {
@@ -14,12 +15,13 @@ namespace Microsoft.CodeAnalysis.Sarif.ConvertToSarif
         /// <returns>0 on success; nonzero on failure.</returns>
         public static int Main(string[] args)
         {
-            return Parser.Default.ParseArguments<
-                ConvertOptions>(args)
+            return Parser.Default.ParseArguments<ConvertOptions, ListOptions>(args)
               .MapResult(
                 (ConvertOptions convertOptions) => RunConvertFile(convertOptions),
+                (ListOptions listOptions) => new ListCommand().Run(listOptions),
                 errs => 1);
         }
+
         public static int RunConvertFile(ConvertOptions convertOptions)
         {
             try
@@ -41,14 +43,15 @@ namespace Microsoft.CodeAnalysis.Sarif.ConvertToSarif
                     convertOptions.OutputFilePath = convertOptions.InputFilePath + ".sarif";
                 }
 
-                if (convertOptions.ToolFormat == ToolFormat.PREfast)
+                if (convertOptions.ToolFormat.Equals("PREfast", StringComparison.OrdinalIgnoreCase))
                 {
                     string sarif = ToolFormatConverter.ConvertPREfastToStandardFormat(convertOptions.InputFilePath);
                     File.WriteAllText(convertOptions.OutputFilePath, sarif);
                 }
                 else
                 {
-                    new ToolFormatConverter().ConvertToStandardFormat(
+                    Assembly converterAssembly = Assembly.LoadFrom(convertOptions.ConverterFilePath);
+                    new ToolFormatConverter(converterAssembly).ConvertToStandardFormat(
                         convertOptions.ToolFormat,
                         convertOptions.InputFilePath,
                         convertOptions.OutputFilePath,

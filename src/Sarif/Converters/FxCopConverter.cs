@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -21,8 +22,17 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
     /// FxCop project files are not supported due to 
     /// loss of source location information
     ///</remarks>
+    [Export(typeof(IToolFileConverter))]
     internal sealed class FxCopConverter : ToolFileConverterBase
     {
+        public override string ToolFormat
+        {
+            get
+            {
+                return "FxCop";
+            }
+        }
+
         /// <summary>
         /// Convert FxCop log to SARIF format stream
         /// </summary>
