@@ -24,8 +24,7 @@ namespace Microsoft.CodeAnalysis.Sarif.ConvertToSarif
             'c',
             "converters",
             Required = false,
-            HelpText = "Path to a plug-in file which contains the SARIF log file converter.",
-            Default = ".\\Sarif.dll")]
+            HelpText = "Path to a plug-in file which contains the SARIF log file converter.")]
         public string ConverterFilePath { get; set; }
 
         [Option(

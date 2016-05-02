@@ -50,7 +50,17 @@ namespace Microsoft.CodeAnalysis.Sarif.ConvertToSarif
                 }
                 else
                 {
-                    Assembly converterAssembly = Assembly.LoadFrom(convertOptions.ConverterFilePath);
+                    string pluginFile;
+                    if (String.IsNullOrWhiteSpace(convertOptions.ConverterFilePath))
+                    {
+                        pluginFile = GetDefaultPluginFile();
+                    }
+                    else
+                    {
+                        pluginFile = convertOptions.ConverterFilePath;
+                    }
+
+                    Assembly converterAssembly = Assembly.LoadFrom(pluginFile);
                     new ToolFormatConverter(converterAssembly).ConvertToStandardFormat(
                         convertOptions.ToolFormat,
                         convertOptions.InputFilePath,
@@ -65,6 +75,11 @@ namespace Microsoft.CodeAnalysis.Sarif.ConvertToSarif
             }
 
             return 0;
+        }
+
+        private static string GetDefaultPluginFile()
+        {
+            return typeof(IToolFileConverter).Assembly.Location;
         }
     }
 }
