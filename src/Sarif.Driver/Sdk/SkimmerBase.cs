@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Resources;
 
-namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
+namespace Microsoft.CodeAnalysis.Sarif.Driver
 {
     public abstract class SkimmerBase<TContext>  : ISkimmer<TContext>
     {
@@ -21,6 +21,8 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
         abstract protected ResourceManager ResourceManager { get; }
 
         abstract protected IEnumerable<string> FormatIds { get; }
+
+        virtual public ResultLevel DefaultLevel { get { return ResultLevel.Warning; } }
 
         virtual public IDictionary<string, string> MessageFormats
         {
@@ -82,7 +84,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
 
         public IDictionary<string, string> Properties { get; }
 
-        public ISet<string> Tags { get; }
+        public IList<string> Tags { get; }
 
         public virtual void Initialize(TContext context) { }
 

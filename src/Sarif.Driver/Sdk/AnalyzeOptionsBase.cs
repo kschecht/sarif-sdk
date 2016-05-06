@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 using CommandLine;
 
-namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
+namespace Microsoft.CodeAnalysis.Sarif.Driver
 {
     [Verb("analyze", HelpText = "Analyze one or more binary files for security and correctness issues.")]
     public class AnalyzeOptionsBase : IAnalyzeOptions
@@ -49,6 +49,12 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
             "hashes",
             HelpText = "Output SHA-256 hash of analysis targets when emitting SARIF reports.")]
         public bool ComputeTargetsHash { get; set; }
+
+        [Option(
+            'e',
+            "environment",
+            HelpText = "Log machine environment details of run to output file. WARNING: This option records potentially sensitive information (such as all environment variable values) to any emitted log.")]
+        public bool LogEnvironment { get; set; }
 
         [Option(
             'p',

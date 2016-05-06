@@ -10,7 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using Microsoft.CodeAnalysis.Sarif.Sdk;
 using Microsoft.CodeAnalysis.Sarif.Writers;
 
 namespace Microsoft.CodeAnalysis.Sarif.Converters
@@ -108,7 +107,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
         /// </returns>
         private ISet<Result> ProcessAndroidStudioLog(XmlReader xmlReader)
         {
-            var results = new HashSet<Result>();
+            var results = new HashSet<Result>(Result.ValueComparer);
 
             int problemsDepth = xmlReader.Depth;
             xmlReader.ReadStartElement(_strings.Problems);
@@ -134,12 +133,11 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             string description = AndroidStudioConverter.GetShortDescriptionForProblem(problem);
             if (problem.Hints.IsEmpty)
             {
-                result.FullMessage = description;
+                result.Message = description;
             }
             else
             {
-                result.ShortMessage = description;
-                result.FullMessage = GenerateFullMessage(description, problem.Hints);
+                result.Message = GenerateFullMessage(description, problem.Hints);
             }
 
             result.Properties = GetSarifIssuePropertiesForProblem(problem);
@@ -212,7 +210,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
                 };
             }
 
-            result.Locations = new HashSet<Location> { location };
+            result.Locations = new List<Location> { location };
 
             return result;
         }
@@ -226,7 +224,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             string desc = problem.Description;
             if (desc == null)
             {
-                return String.Format(CultureInfo.InvariantCulture, SarifResources.AndroidStudioDescriptionUnknown, problem.ProblemClass);
+                return String.Format(CultureInfo.InvariantCulture, SdkResources.AndroidStudioDescriptionUnknown, problem.ProblemClass);
             }
 
             return desc;
@@ -260,7 +258,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             foreach (string hint in hints)
             {
                 sb.AppendLine();
-                sb.AppendFormat(CultureInfo.InvariantCulture, SarifResources.AndroidStudioHintStaple, hint);
+                sb.AppendFormat(CultureInfo.InvariantCulture, SdkResources.AndroidStudioHintStaple, hint);
             }
 
             return sb.ToString();

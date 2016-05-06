@@ -1,5 +1,6 @@
 {
-  "version": "1.0.0-beta.3",
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0-beta.4",
   "runs": [
     {
       "tool": {
@@ -23,7 +24,7 @@
       "results": [
         {
           "ruleId": "Android Resources Validation",
-          "fullMessage": "Cannot resolve symbol'android:textColor'",
+          "message": "Cannot resolve symbol'android:textColor'",
           "locations": [
             {
               "analysisTarget": {

@@ -12,9 +12,14 @@ namespace Microsoft.CodeAnalysis.Sarif
     /// A single file. In some cases, this file might be nested within another file.
     /// </summary>
     [DataContract]
-    [GeneratedCode("Microsoft.Json.Schema.ToDotNet", "0.16.0.0")]
-    public partial class FileData : ISarifNode, IEquatable<FileData>
+    [GeneratedCode("Microsoft.Json.Schema.ToDotNet", "0.22.0.0")]
+    public partial class FileData : ISarifNode
     {
+        public static IEqualityComparer<FileData> ValueComparer => FileDataEqualityComparer.Instance;
+
+        public bool ValueEquals(FileData other) => ValueComparer.Equals(this, other);
+        public int ValueGetHashCode() => ValueComparer.GetHashCode(this);
+
         /// <summary>
         /// Gets a value indicating the type of object implementing <see cref="ISarifNode" />.
         /// </summary>
@@ -54,7 +59,7 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// An array of hash objects, each of which specifies a hashed value for the file, along with the name of the algorithm used to compute the hash.
         /// </summary>
         [DataMember(Name = "hashes", IsRequired = false, EmitDefaultValue = false)]
-        public ISet<Hash> Hashes { get; set; }
+        public IList<Hash> Hashes { get; set; }
 
         /// <summary>
         /// Key/value pairs that provide additional information about the file.
@@ -66,151 +71,7 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// A set of distinct strings that provide additional information about the file.
         /// </summary>
         [DataMember(Name = "tags", IsRequired = false, EmitDefaultValue = false)]
-        public ISet<string> Tags { get; set; }
-
-        public override bool Equals(object other)
-        {
-            return Equals(other as FileData);
-        }
-
-        public override int GetHashCode()
-        {
-            int result = 17;
-            unchecked
-            {
-                if (Uri != null)
-                {
-                    result = (result * 31) + Uri.GetHashCode();
-                }
-
-                result = (result * 31) + Offset.GetHashCode();
-                result = (result * 31) + Length.GetHashCode();
-                if (MimeType != null)
-                {
-                    result = (result * 31) + MimeType.GetHashCode();
-                }
-
-                if (Hashes != null)
-                {
-                    foreach (var value_0 in Hashes)
-                    {
-                        result = result * 31;
-                        if (value_0 != null)
-                        {
-                            result = (result * 31) + value_0.GetHashCode();
-                        }
-                    }
-                }
-
-                if (Properties != null)
-                {
-                    // Use xor for dictionaries to be order-independent.
-                    int xor_0 = 0;
-                    foreach (var value_1 in Properties)
-                    {
-                        xor_0 ^= value_1.Key.GetHashCode();
-                        if (value_1.Value != null)
-                        {
-                            xor_0 ^= value_1.Value.GetHashCode();
-                        }
-                    }
-
-                    result = (result * 31) + xor_0;
-                }
-
-                if (Tags != null)
-                {
-                    foreach (var value_2 in Tags)
-                    {
-                        result = result * 31;
-                        if (value_2 != null)
-                        {
-                            result = (result * 31) + value_2.GetHashCode();
-                        }
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        public bool Equals(FileData other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (Uri != other.Uri)
-            {
-                return false;
-            }
-
-            if (Offset != other.Offset)
-            {
-                return false;
-            }
-
-            if (Length != other.Length)
-            {
-                return false;
-            }
-
-            if (MimeType != other.MimeType)
-            {
-                return false;
-            }
-
-            if (!Object.ReferenceEquals(Hashes, other.Hashes))
-            {
-                if (Hashes == null || other.Hashes == null)
-                {
-                    return false;
-                }
-
-                if (!Hashes.SetEquals(other.Hashes))
-                {
-                    return false;
-                }
-            }
-
-            if (!Object.ReferenceEquals(Properties, other.Properties))
-            {
-                if (Properties == null || other.Properties == null || Properties.Count != other.Properties.Count)
-                {
-                    return false;
-                }
-
-                foreach (var value_0 in Properties)
-                {
-                    string value_1;
-                    if (!other.Properties.TryGetValue(value_0.Key, out value_1))
-                    {
-                        return false;
-                    }
-
-                    if (value_0.Value != value_1)
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            if (!Object.ReferenceEquals(Tags, other.Tags))
-            {
-                if (Tags == null || other.Tags == null)
-                {
-                    return false;
-                }
-
-                if (!Tags.SetEquals(other.Tags))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
+        public IList<string> Tags { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileData" /> class.
@@ -243,7 +104,7 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// <param name="tags">
         /// An initialization value for the <see cref="P: Tags" /> property.
         /// </param>
-        public FileData(Uri uri, int offset, int length, string mimeType, ISet<Hash> hashes, IDictionary<string, string> properties, ISet<string> tags)
+        public FileData(Uri uri, int offset, int length, string mimeType, IEnumerable<Hash> hashes, IDictionary<string, string> properties, IEnumerable<string> tags)
         {
             Init(uri, offset, length, mimeType, hashes, properties, tags);
         }
@@ -285,7 +146,7 @@ namespace Microsoft.CodeAnalysis.Sarif
             return new FileData(this);
         }
 
-        private void Init(Uri uri, int offset, int length, string mimeType, ISet<Hash> hashes, IDictionary<string, string> properties, ISet<string> tags)
+        private void Init(Uri uri, int offset, int length, string mimeType, IEnumerable<Hash> hashes, IDictionary<string, string> properties, IEnumerable<string> tags)
         {
             if (uri != null)
             {
@@ -297,7 +158,7 @@ namespace Microsoft.CodeAnalysis.Sarif
             MimeType = mimeType;
             if (hashes != null)
             {
-                var destination_0 = new HashSet<Hash>();
+                var destination_0 = new List<Hash>();
                 foreach (var value_0 in hashes)
                 {
                     if (value_0 == null)
@@ -320,7 +181,7 @@ namespace Microsoft.CodeAnalysis.Sarif
 
             if (tags != null)
             {
-                var destination_1 = new HashSet<string>();
+                var destination_1 = new List<string>();
                 foreach (var value_1 in tags)
                 {
                     destination_1.Add(value_1);

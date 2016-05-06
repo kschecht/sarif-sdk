@@ -1,5 +1,6 @@
 {
-  "version": "1.0.0-beta.3",
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0-beta.4",
   "runs": [
     {
       "tool": {
@@ -31,7 +32,7 @@
       "results": [
         {
           "ruleId": "'for' loop replaceable with 'foreach'",
-          "fullMessage": "<code>for</code> loop replaceable with 'foreach' #loc",
+          "message": "<code>for</code> loop replaceable with 'foreach' #loc",
           "locations": [
             {
               "resultFile": {

@@ -1,5 +1,6 @@
 {
-  "version": "1.0.0-beta.3",
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0-beta.4",
   "runs": [
     {
       "tool": {
@@ -31,7 +32,7 @@
       "results": [
         {
           "ruleId": "'if' statement may be replaced with && or || expression",
-          "fullMessage": "<code>if</code> statement can be replaced with 'return id == R.id.action_settings || super.onOptionsItemSelected(item);' #loc",
+          "message": "<code>if</code> statement can be replaced with 'return id == R.id.action_settings || super.onOptionsItemSelected(item);' #loc",
           "locations": [
             {
               "resultFile": {

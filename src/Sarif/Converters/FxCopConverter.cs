@@ -94,10 +94,20 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
                 result.ToolFingerprint = uniqueId;
             }
 
+            string status = context.Status;
+
+            if ("ExcludedInSource".Equals(status))
+            {
+                result.SuppressionStates = SuppressionStates.SuppressedInSource;
+            }
+            else if ("ExcludedInProject".Equals(status))
+            {
+                result.SuppressionStates = SuppressionStates.SuppressedInBaseline;
+            }
+
             result.RuleId = context.CheckId;
-            result.FullMessage = context.Message;
-            result.ShortMessage = context.Typename;
-            result.Kind = ResultKind.Warning;
+            result.Message = context.Message;
+            result.Level = ResultLevel.Warning;
 
             var location = new Location();
 
@@ -107,6 +117,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
                 {
                     Uri = new Uri(context.Target, UriKind.RelativeOrAbsolute)
                 };
+
             }
 
             string sourceFile = GetFilePath(context);
@@ -128,7 +139,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
                 AddLogicalLocation(location, logicalLocationComponents);
             }
 
-            result.Locations = new HashSet<Location> { location };
+            result.Locations = new List<Location> { location };
 
             var properties = new Dictionary<string, string>();
             TryAddProperty(properties, context.Level, "Level");
@@ -261,6 +272,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             public string Category { get; private set; }
             public string Typename { get; private set; }
             public string FixCategory { get; private set; }
+            public string Status { get; private set; }
             public string Message { get; private set; }
             public string Result { get; private set; }
             public string Certainty { get; private set; }
@@ -331,13 +343,14 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
                 ClearMessage();
             }
 
-            public void RefineMessage(string checkId, string typename, string messageId, string category, string fixcategory)
+            public void RefineMessage(string checkId, string typename, string messageId, string category, string fixcategory, string status)
             {
                 CheckId = checkId;
                 MessageId = messageId;
                 Category = category;
                 Typename = typename;
                 FixCategory = fixcategory;
+                Status = status;
 
                 ClearIssue();
             }
@@ -418,6 +431,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             {
                 RefineModule(null);
             }
+
             public void ClearResource()
             {
                 RefineResource(null);
@@ -440,7 +454,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
 
             public void ClearMessage()
             {
-                RefineMessage(null, null, null, null, null);
+                RefineMessage(null, null, null, null, null, null);
             }
 
             public void ClearIssue()
@@ -714,7 +728,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             reader.ReadChildren(SchemaStrings.ElementNamespaces, parent);
         }
 
-        private static void ReadNamespace(SparseReader reader, object parent)
+        private void ReadNamespace(SparseReader reader, object parent)
         {
             Context context = (Context)parent;
 
@@ -763,7 +777,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             reader.ReadChildren(SchemaStrings.ElementMessages, parent);
         }
 
-        private static void ReadMessage(SparseReader reader, object parent)
+        private void ReadMessage(SparseReader reader, object parent)
         {
             Context context = (Context)parent;
 
@@ -772,9 +786,24 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             string category = reader.ReadAttributeString(SchemaStrings.AttributeCategory);
             string checkId = reader.ReadAttributeString(SchemaStrings.AttributeCheckId);
             string fixCategory = reader.ReadAttributeString(SchemaStrings.AttributeFixCategory);
+            string status = reader.ReadAttributeString(SchemaStrings.AttributeStatus);
 
-            context.RefineMessage(checkId, typename, messageId, category, fixCategory);
+            context.RefineMessage(checkId, typename, messageId, category, fixCategory, status);
+
+            if ("Excluded".Equals(status) || "ExcludedInSource".Equals(status))
+            {
+                // FxCop doesn't actually emit message details for most excluded items
+                // and so we must fire here for these items, as the scan for child
+                // <Issue> elements may not produce anything. FxCop seems to emit
+                // issues for excluded items which are at the namespace level only.
+                if (ResultRead != null)
+                {
+                    ResultRead(context);
+                }
+            }
+
             reader.ReadChildren(SchemaStrings.ElementMessage, parent);
+
             context.ClearMessage();
         }
 

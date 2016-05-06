@@ -7,7 +7,6 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Xml;
 using Microsoft.CodeAnalysis.Sarif.Driver;
-using Microsoft.CodeAnalysis.Sarif.Sdk;
 
 namespace Microsoft.CodeAnalysis.Sarif.Converters
 {
@@ -35,7 +34,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
         {
             if (locations.IsDefaultOrEmpty)
             {
-                throw new ArgumentException(SarifResources.CppCheckMissingLocation);
+                throw new ArgumentException(SdkResources.CppCheckMissingLocation);
             }
 
             this.Id = id;
@@ -60,7 +59,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
         {
             if (!reader.IsStartElement(strings.Error))
             {
-                throw reader.CreateException(SarifResources.CppCheckElementNotError);
+                throw reader.CreateException(SdkResources.CppCheckElementNotError);
             }
 
             string id = null;
@@ -124,14 +123,13 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
                 Properties = new Dictionary<string, string> { { "Severity", this.Severity } }
             };
 
-            if (this.Message == this.VerboseMessage)
-            {
-                result.FullMessage = this.Message;
+            if (!string.IsNullOrEmpty(this.VerboseMessage))
+            { 
+                result.Message = this.VerboseMessage;
             }
             else
             {
-                result.FullMessage = this.VerboseMessage;
-                result.ShortMessage = this.Message;
+                result.Message = this.Message;
             }
 
             PhysicalLocation lastLocationConverted;
@@ -141,20 +139,29 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             }
             else
             {
-                var flow = new List<AnnotatedCodeLocation>();
-                flow.Capacity = this.Locations.Length;
+                var locations = new List<AnnotatedCodeLocation>
+                {
+                    Capacity = this.Locations.Length
+                };
+
                 foreach (CppCheckLocation loc in this.Locations)
                 {
-                    flow.Add(new AnnotatedCodeLocation { PhysicalLocation = loc.ToSarifPhysicalLocation() });
+                    locations.Add(new AnnotatedCodeLocation { PhysicalLocation = loc.ToSarifPhysicalLocation() });
                 }
+
+                var flow = new CodeFlow
+                {
+                    Locations = locations
+                };
+
+                result.CodeFlows = new List<CodeFlow> { flow };
 
                 // In the N != 1 case, set the overall location's location to
                 // the last entry in the execution flow.
-                lastLocationConverted = flow[flow.Count - 1].PhysicalLocation;
-                result.CodeFlows = new[] { flow };
+                lastLocationConverted = locations[locations.Count - 1].PhysicalLocation;
             }
 
-            result.Locations = new HashSet<Location>
+            result.Locations = new List<Location>
             {
                 new Location
                 {

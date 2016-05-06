@@ -4,9 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-using Microsoft.CodeAnalysis.Sarif.Sdk;
-
-namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
+namespace Microsoft.CodeAnalysis.Sarif.Driver
 {
     public class AggregatingLogger : IDisposable, IAnalysisLogger
     {
@@ -68,6 +66,22 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
             foreach (IAnalysisLogger logger in Loggers)
             {
                 logger.Log(rule, result);
+            }
+        }
+
+        public void LogToolNotification(Notification notification)
+        {
+            foreach (IAnalysisLogger logger in Loggers)
+            {
+                logger.LogToolNotification(notification);
+            }
+        }
+
+        public void LogConfigurationNotification(Notification notification)
+        {
+            foreach (IAnalysisLogger logger in Loggers)
+            {
+                logger.LogConfigurationNotification(notification);
             }
         }
     }

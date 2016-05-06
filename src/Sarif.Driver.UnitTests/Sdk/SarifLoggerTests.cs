@@ -4,9 +4,10 @@
 using System.IO;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis.Sarif.Writers;
 using Xunit;
 
-namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
+namespace Microsoft.CodeAnalysis.Sarif.Driver
 {
     public class SarifLoggerTests
     {
@@ -17,9 +18,10 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
 
             var logger = new SarifLogger(
                 textWriter,
-                verbose: false,
                 analysisTargets: Enumerable.Empty<string>(),
+                verbose: false,
                 computeTargetsHash: false,
+                logEnvironment: false,
                 prereleaseInfo: null,
                 invocationTokensToRedact: null);
 

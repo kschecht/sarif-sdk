@@ -6,13 +6,11 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Text;
-
-using Microsoft.CodeAnalysis.Sarif.Sdk;
 using Microsoft.CodeAnalysis.Sarif.Readers;
 
 using Newtonsoft.Json;
 
-namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
+namespace Microsoft.CodeAnalysis.Sarif.Driver
 {
     public abstract class ExportRulesMetadataCommandBase : PlugInDriverCommand<ExportRulesMetadataOptions>
     {
@@ -106,7 +104,9 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
         {
             var log = new SarifLog();
 
-            log.Version = SarifVersion.OneZeroZeroBetaThree;
+            SarifVersion sarifVersion = SarifVersion.OneZeroZeroBetaFour;
+            log.SchemaUri = sarifVersion.ConvertToSchemaUri();
+            log.Version = sarifVersion;
 
             // The SARIF spec currently requires an array
             // of run logs with at least one member
@@ -116,7 +116,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
             run.Tool = new Tool();
 
             run.Tool.InitializeFromAssembly(this.GetType().Assembly, Prerelease);
-            run.Results = new HashSet<Result>();
+            run.Results = new List<Result>();
 
             log.Runs.Add(run);
             run.Rules = new Dictionary<string, Rule>();
@@ -129,7 +129,6 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
 
                 newRule.Id = rule.Id;
                 newRule.Name = rule.Name;
-                newRule.Options = rule.Options;
                 newRule.HelpUri = rule.HelpUri;
                 newRule.Properties = rule.Properties;
                 newRule.FullDescription = rule.FullDescription;

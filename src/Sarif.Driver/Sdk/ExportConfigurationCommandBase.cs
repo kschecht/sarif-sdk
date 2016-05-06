@@ -6,8 +6,7 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Reflection;
 
-
-namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
+namespace Microsoft.CodeAnalysis.Sarif.Driver
 {
     public abstract class ExportConfigurationCommandBase : PlugInDriverCommand<ExportConfigurationOptions>
     {

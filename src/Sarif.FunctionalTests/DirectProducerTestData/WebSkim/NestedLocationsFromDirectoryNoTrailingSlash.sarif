@@ -1,5 +1,6 @@
 {
-  "version": "1.0.0-beta.3",
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0-beta.4",
   "runs": [
     {
       "tool": {
@@ -8,17 +9,16 @@
         "version": "7.0.7000.0",
         "semanticVersion": "7.0.7000",
         "fileVersion": "7.0.20811.0",
+        "language": "en-US",
         "properties": {
-          "Language": "Language Neutral",
-          "FileName": "D:\\src\\SecDevTools\\Main\\bin\\x64\\Release\\ModernCop\\mod50.exe",
           "CompanyName": "Microsoft Corporation"
         }
       },
       "results": [
         {
           "ruleId": "M1003",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error"
           },
           "locations": [
@@ -34,8 +34,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -52,8 +52,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -86,8 +86,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -104,8 +104,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -138,8 +138,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -156,8 +156,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -190,8 +190,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -208,8 +208,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -242,8 +242,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -260,8 +260,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -294,8 +294,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -312,8 +312,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -346,8 +346,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -364,8 +364,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -398,8 +398,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -416,8 +416,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -450,8 +450,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -468,8 +468,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -502,8 +502,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -520,8 +520,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -554,8 +554,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -572,8 +572,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -606,8 +606,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -624,8 +624,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -658,8 +658,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -676,8 +676,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -710,8 +710,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -728,8 +728,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -762,8 +762,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -780,8 +780,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -814,8 +814,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -832,8 +832,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -866,8 +866,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -884,8 +884,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -918,8 +918,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -936,8 +936,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -970,8 +970,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -988,8 +988,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1022,8 +1022,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1040,8 +1040,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1074,8 +1074,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1092,8 +1092,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1126,8 +1126,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1144,8 +1144,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1178,8 +1178,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1196,8 +1196,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1230,8 +1230,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1248,8 +1248,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1282,8 +1282,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1300,8 +1300,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1334,8 +1334,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1352,8 +1352,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1386,8 +1386,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1404,8 +1404,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1438,8 +1438,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1456,8 +1456,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1490,8 +1490,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1508,8 +1508,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1542,8 +1542,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1560,8 +1560,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1594,8 +1594,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1612,8 +1612,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1646,8 +1646,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1664,8 +1664,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1698,8 +1698,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1716,8 +1716,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1750,8 +1750,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1768,8 +1768,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1802,8 +1802,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1820,8 +1820,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1854,8 +1854,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1872,8 +1872,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1906,8 +1906,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1924,8 +1924,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -1958,8 +1958,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1976,8 +1976,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2010,8 +2010,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2028,8 +2028,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2062,8 +2062,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2080,8 +2080,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2114,8 +2114,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2132,8 +2132,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2166,8 +2166,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2184,8 +2184,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2218,8 +2218,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2236,8 +2236,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2270,8 +2270,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2288,8 +2288,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2322,8 +2322,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2340,8 +2340,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2374,8 +2374,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2392,8 +2392,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2426,8 +2426,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2444,8 +2444,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2478,8 +2478,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2496,8 +2496,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2530,8 +2530,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2548,8 +2548,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2582,8 +2582,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2600,8 +2600,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2634,8 +2634,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2652,8 +2652,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2686,8 +2686,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2704,8 +2704,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2738,8 +2738,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2756,8 +2756,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2790,8 +2790,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2808,8 +2808,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2842,8 +2842,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2860,8 +2860,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2894,8 +2894,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2912,8 +2912,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2946,8 +2946,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -2964,8 +2964,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -2998,8 +2998,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -3016,8 +3016,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -3050,8 +3050,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -3068,8 +3068,8 @@
         },
         {
           "ruleId": "JS3085",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "apple",
@@ -3102,8 +3102,8 @@
         },
         {
           "ruleId": "JS2021",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -3120,8 +3120,8 @@
         },
         {
           "ruleId": "JS1003",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error"
           },
           "locations": [
@@ -3137,8 +3137,8 @@
         },
         {
           "ruleId": "JS2027",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -3154,8 +3154,8 @@
         },
         {
           "ruleId": "JS2073",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "microsoft",
@@ -3176,8 +3176,8 @@
         },
         {
           "ruleId": "JS2073",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "fwlink",
@@ -3198,8 +3198,8 @@
         },
         {
           "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "args",
@@ -3221,8 +3221,8 @@
         },
         {
           "ruleId": "JS2045",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -3239,8 +3239,8 @@
         },
         {
           "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "args",
@@ -3262,8 +3262,8 @@
         },
         {
           "ruleId": "JS2073",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "args",
@@ -3398,9 +3398,14 @@
           ]
         }
       },
-      "invocation": "mod50  analyze /appx d:\\src\\SecDevTools\\Main\\src\\ModernCop\\Source\\WebRules.Test.Unit\\ModernCopTestData\\WebRules_PackageRules\\MinificationRuleApp /out d:\\src\\sarif-sdk\\src\\Sarif.FunctionalTests\\DirectProducerTestData\\WebSkim\\NestedLocationsFromDirectoryNoTrailingSlash.sarif",
-      "startTime": "2016-04-22T20:43:03.0149381Z",
-      "endTime": "2016-04-22T20:43:04.5119177Z"
+      "invocation": {
+        "commandLine": "D:\\src\\SecDevTools\\Main\\bin\\x64\\Debug\\ModernCop\\mod50.exe  analyze /appx d:\\src\\SecDevTools\\Main\\src\\ModernCop\\Source\\WebRules.Test.Unit\\ModernCopTestData\\WebRules_PackageRules\\MinificationRuleApp /out .\\NestedLocationsFromDirectoryNoTrailingSlash.sarif",
+        "startTime": "2016-05-04T23:03:21.47Z",
+        "endTime": "2016-05-04T23:03:23.37Z",
+        "processId": 47948,
+        "fileName": "D:\\src\\SecDevTools\\Main\\bin\\x64\\Debug\\ModernCop\\mod50.exe",
+        "workingDirectory": "d:\\src\\sarif-sdk\\src\\Sarif.FunctionalTests\\DirectProducerTestData\\WebSkim"
+      }
     }
   ]
 }

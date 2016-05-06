@@ -107,14 +107,13 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
         public void FortifyConverter_Convert_ShortMessageIsUnset()
         {
             Result result = FortifyConverter.ConvertFortifyIssueToSarifIssue(FortifyConverterTests.GetBasicIssue());
-            Assert.IsNull(result.ShortMessage);
         }
 
         [TestMethod]
         public void FortifyConverter_Convert_FullMessageFallsBackToCategoryIfNoAbstractPresent()
         {
             Result result = FortifyConverter.ConvertFortifyIssueToSarifIssue(FortifyConverterTests.GetBasicIssue());
-            result.FullMessage.Should().Contain("cat");
+            result.Message.Should().Contain("cat");
         }
 
         [TestMethod]
@@ -123,7 +122,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             Builder builder = FortifyConverterTests.GetBasicBuilder();
             builder.Abstract = "Some abstract message";
             Result result = FortifyConverter.ConvertFortifyIssueToSarifIssue(builder.ToImmutable());
-            Assert.AreEqual("Some abstract message", result.FullMessage);
+            Assert.AreEqual("Some abstract message", result.Message);
         }
 
         [TestMethod]
@@ -132,7 +131,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             Builder builder = FortifyConverterTests.GetBasicBuilder();
             builder.AbstractCustom = "Some abstract custom message";
             Result result = FortifyConverter.ConvertFortifyIssueToSarifIssue(builder.ToImmutable());
-            Assert.AreEqual("Some abstract custom message", result.FullMessage);
+            Assert.AreEqual("Some abstract custom message", result.Message);
         }
 
         [TestMethod]
@@ -143,7 +142,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             builder.AbstractCustom = "Some abstract custom message";
             Result result = FortifyConverter.ConvertFortifyIssueToSarifIssue(builder.ToImmutable());
             Assert.AreEqual("Some abstract message" + Environment.NewLine + "Some abstract custom message",
-                result.FullMessage);
+                result.Message);
         }
 
         [TestMethod]
@@ -203,7 +202,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             Result result = FortifyConverter.ConvertFortifyIssueToSarifIssue(builder.ToImmutable());
             Assert.AreEqual(1, result.Locations.Count);
             Assert.AreEqual("filePath", result.Locations.First().ResultFile.Uri.ToString());
-            Assert.AreEqual(new Region { StartLine = 1729 }, result.Locations.First().ResultFile.Region);
+            Assert.IsTrue(result.Locations.First().ResultFile.Region.ValueEquals(new Region { StartLine = 1729 }));
         }
 
         [TestMethod]
@@ -220,11 +219,11 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             builder.Source = FortifyConverterTests.s_dummyPathSourceElement;
             Result result = FortifyConverter.ConvertFortifyIssueToSarifIssue(builder.ToImmutable());
             Assert.AreEqual(1, result.CodeFlows.Count);
-            IList<AnnotatedCodeLocation> flow = result.CodeFlows[0];
-            Assert.AreEqual("sourceFilePath", flow[0].PhysicalLocation.Uri.ToString());
-            Assert.AreEqual(new Region { StartLine = 42 }, flow[0].PhysicalLocation.Region);
-            Assert.AreEqual("filePath", flow[1].PhysicalLocation.Uri.ToString());
-            Assert.AreEqual(new Region { StartLine = 1729 }, flow[1].PhysicalLocation.Region);
+            IList<AnnotatedCodeLocation> flowLocations = result.CodeFlows.First().Locations;
+            Assert.AreEqual("sourceFilePath", flowLocations[0].PhysicalLocation.Uri.ToString());
+            Assert.IsTrue(flowLocations[0].PhysicalLocation.Region.ValueEquals(new Region { StartLine = 42 }));
+            Assert.AreEqual("filePath", flowLocations[1].PhysicalLocation.Uri.ToString());
+            Assert.IsTrue(flowLocations[1].PhysicalLocation.Region.ValueEquals(new Region { StartLine = 1729 }));
         }
     }
 }

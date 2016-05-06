@@ -12,9 +12,14 @@ namespace Microsoft.CodeAnalysis.Sarif
     /// A code annotation that consists of single physical location and associated message, used to express code flows through a method, or other locations that are related to a result.
     /// </summary>
     [DataContract]
-    [GeneratedCode("Microsoft.Json.Schema.ToDotNet", "0.16.0.0")]
-    public partial class AnnotatedCodeLocation : ISarifNode, IEquatable<AnnotatedCodeLocation>
+    [GeneratedCode("Microsoft.Json.Schema.ToDotNet", "0.22.0.0")]
+    public partial class AnnotatedCodeLocation : ISarifNode
     {
+        public static IEqualityComparer<AnnotatedCodeLocation> ValueComparer => AnnotatedCodeLocationEqualityComparer.Instance;
+
+        public bool ValueEquals(AnnotatedCodeLocation other) => ValueComparer.Equals(this, other);
+        public int ValueGetHashCode() => ValueComparer.GetHashCode(this);
+
         /// <summary>
         /// Gets a value indicating the type of object implementing <see cref="ISarifNode" />.
         /// </summary>
@@ -39,123 +44,16 @@ namespace Microsoft.CodeAnalysis.Sarif
         public string Message { get; set; }
 
         /// <summary>
-        /// Key/value pairs that provide additional details about the code location.
+        /// Key/value pairs that provide additional information about the code location.
         /// </summary>
         [DataMember(Name = "properties", IsRequired = false, EmitDefaultValue = false)]
         public IDictionary<string, string> Properties { get; set; }
 
         /// <summary>
-        /// A unique set of strings that provide additional information for the code location.
+        /// A unique set of strings that provide additional information about the code location.
         /// </summary>
         [DataMember(Name = "tags", IsRequired = false, EmitDefaultValue = false)]
-        public ISet<string> Tags { get; set; }
-
-        public override bool Equals(object other)
-        {
-            return Equals(other as AnnotatedCodeLocation);
-        }
-
-        public override int GetHashCode()
-        {
-            int result = 17;
-            unchecked
-            {
-                if (PhysicalLocation != null)
-                {
-                    result = (result * 31) + PhysicalLocation.GetHashCode();
-                }
-
-                if (Message != null)
-                {
-                    result = (result * 31) + Message.GetHashCode();
-                }
-
-                if (Properties != null)
-                {
-                    // Use xor for dictionaries to be order-independent.
-                    int xor_0 = 0;
-                    foreach (var value_0 in Properties)
-                    {
-                        xor_0 ^= value_0.Key.GetHashCode();
-                        if (value_0.Value != null)
-                        {
-                            xor_0 ^= value_0.Value.GetHashCode();
-                        }
-                    }
-
-                    result = (result * 31) + xor_0;
-                }
-
-                if (Tags != null)
-                {
-                    foreach (var value_1 in Tags)
-                    {
-                        result = result * 31;
-                        if (value_1 != null)
-                        {
-                            result = (result * 31) + value_1.GetHashCode();
-                        }
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        public bool Equals(AnnotatedCodeLocation other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (!Object.Equals(PhysicalLocation, other.PhysicalLocation))
-            {
-                return false;
-            }
-
-            if (Message != other.Message)
-            {
-                return false;
-            }
-
-            if (!Object.ReferenceEquals(Properties, other.Properties))
-            {
-                if (Properties == null || other.Properties == null || Properties.Count != other.Properties.Count)
-                {
-                    return false;
-                }
-
-                foreach (var value_0 in Properties)
-                {
-                    string value_1;
-                    if (!other.Properties.TryGetValue(value_0.Key, out value_1))
-                    {
-                        return false;
-                    }
-
-                    if (value_0.Value != value_1)
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            if (!Object.ReferenceEquals(Tags, other.Tags))
-            {
-                if (Tags == null || other.Tags == null)
-                {
-                    return false;
-                }
-
-                if (!Tags.SetEquals(other.Tags))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
+        public IList<string> Tags { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AnnotatedCodeLocation" /> class.
@@ -179,7 +77,7 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// <param name="tags">
         /// An initialization value for the <see cref="P: Tags" /> property.
         /// </param>
-        public AnnotatedCodeLocation(PhysicalLocation physicalLocation, string message, IDictionary<string, string> properties, ISet<string> tags)
+        public AnnotatedCodeLocation(PhysicalLocation physicalLocation, string message, IDictionary<string, string> properties, IEnumerable<string> tags)
         {
             Init(physicalLocation, message, properties, tags);
         }
@@ -221,7 +119,7 @@ namespace Microsoft.CodeAnalysis.Sarif
             return new AnnotatedCodeLocation(this);
         }
 
-        private void Init(PhysicalLocation physicalLocation, string message, IDictionary<string, string> properties, ISet<string> tags)
+        private void Init(PhysicalLocation physicalLocation, string message, IDictionary<string, string> properties, IEnumerable<string> tags)
         {
             if (physicalLocation != null)
             {
@@ -236,7 +134,7 @@ namespace Microsoft.CodeAnalysis.Sarif
 
             if (tags != null)
             {
-                var destination_0 = new HashSet<string>();
+                var destination_0 = new List<string>();
                 foreach (var value_0 in tags)
                 {
                     destination_0.Add(value_0);

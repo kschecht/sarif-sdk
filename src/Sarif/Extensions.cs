@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
 using Microsoft.CodeAnalysis.Sarif.Driver;
-using Microsoft.CodeAnalysis.Sarif.Sdk;
 
 namespace Microsoft.CodeAnalysis.Sarif
 {
@@ -164,7 +163,7 @@ namespace Microsoft.CodeAnalysis.Sarif
                 }
                 else
                 {
-                    throw xmlReader.CreateException(SarifResources.ExpectedElementNamed, elementName);
+                    throw xmlReader.CreateException(SdkResources.ExpectedElementNamed, elementName);
                 }
             }
 

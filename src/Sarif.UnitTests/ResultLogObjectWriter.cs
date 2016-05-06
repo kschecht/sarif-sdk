@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.CodeAnalysis.Sarif.Sdk;
 
 namespace Microsoft.CodeAnalysis.Sarif.Writers
 {
@@ -36,16 +35,15 @@ namespace Microsoft.CodeAnalysis.Sarif.Writers
 
             if (_tool != null)
             {
-                throw new InvalidOperationException(SarifResources.ToolAlreadyWritten);
+                throw new InvalidOperationException(SdkResources.ToolAlreadyWritten);
             }
 
             _tool = tool;
         }
 
 
-        public void WriteRunProperties(string invocation, DateTime startTime, DateTime endTime, string correlationId, string architecture)
+        public void WriteInvocation(Invocation invocation)
         {
-
         }
 
         /// <summary>
@@ -104,7 +102,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Writers
 
             if (_tool == null)
             {
-                throw new InvalidOperationException(SarifResources.CannotWriteResultToolMissing);
+                throw new InvalidOperationException(SdkResources.CannotWriteResultToolMissing);
             }
         }
 
@@ -138,6 +136,16 @@ namespace Microsoft.CodeAnalysis.Sarif.Writers
         }
 
         public void WriteRules(IDictionary<string, IRule> rules)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WriteToolNotifications(IEnumerable<Notification> notifications)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WriteConfigurationNotifications(IEnumerable<Notification> notifications)
         {
             throw new NotImplementedException();
         }

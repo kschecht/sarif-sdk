@@ -1,13 +1,17 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Static Analysis Results Format (SARIF) Version 1.0 JSON Schema (Draft 1.0.0-beta.3)",
-  "description": "Static Analysis Results Format (SARIF) Version 1.0 JSON Schema (Draft 1.0.0-beta.3): a standard format for the output of static analysis and other tools.",
+  "title": "Static Analysis Results Format (SARIF) Version 1.0 JSON Schema (Draft 1.0.0-beta.4)",
+  "description": "Static Analysis Results Format (SARIF) Version 1.0 JSON Schema (Draft 1.0.0-beta.4): a standard format for the output of static analysis and other tools.",
   "additionalProperties": false,
   "type": "object",
   "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri"
+    },
     "version": {
       "description": "The SARIF format version of this log file.",
-      "enum": [ "1.0.0-beta.3" ]
+      "enum": [ "1.0.0-beta.4" ]
     },
 
     "runs": {
@@ -21,106 +25,6 @@
   },
   "required": [ "version", "runs" ],
   "definitions": {
-    "stack": {
-      "description": "A call stack that is relevant to a result.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "message": {
-          "description": "A message relevant to this call stack.",
-          "type": "string"
-        },
-        "frames": {
-          "description": "An array of stack frames that represent a sequence of calls, rendered in reverse chronological order, that comprise the call stack.",
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/stackFrame"
-          }
-        },
-        "properties": {
-          "description": "Key/value pairs that provide additional details about the stack.",
-          "type": "object",
-          "default": { }
-        },
-        "tags": {
-          "description": "A unique set of strings that provide additional information for the stack.",
-          "type": "array",
-          "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "default": [ ]
-          }
-        }
-      },
-      "required": [ "frames" ]
-    },
-    "stackFrame": {
-      "description": "A function call within a stack trace.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "message": {
-          "description": "A message relevant to this stack frame.",
-          "type": "string"
-        },
-        "uri": {
-          "description": "The uri of the source code file to which this stack frame refers.",
-          "type": "string",
-          "format": "uri"
-        },
-        "line": {
-          "description": "The line of the location to which this stack frame refers.",
-          "type": "integer"
-        },
-        "column": {
-          "description": "The line of the location to which this stack frame refers.",
-          "type": "integer"
-        },
-        "module": {
-          "description": "The name of the module that contains the code that is executing.",
-          "type": "string"
-        },
-        "fullyQualifiedLogicalName": {
-          "description": "The fully qualified name of the method or function that is executing.",
-          "type": "string"
-        },
-        "logicalLocationKey": {
-          "description": "A string used as a key into the logicalLocations dictionary, in case the string specified by 'fullyQualifiedLogicalName' is not unique.",
-          "type": "string"
-        },
-        "address": {
-          "description": "The address of the method or function that is executing.",
-          "type": "integer"
-        },
-        "offset": {
-          "description": "The offset from the method or function that is executing.",
-          "type": "integer"
-        },
-        "parameters": {
-          "description": "The parameters of the call that is executing.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "default": [ ]
-          }
-        },
-        "properties": {
-          "description": "Key/value pairs that provide additional details about the stack frame.",
-          "type": "object",
-          "default": { }
-        },
-        "tags": {
-          "description": "A unique set of strings that provide additional information for the stack frame.",
-          "type": "array",
-          "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "default": [ ]
-          }
-        }
-      }
-    },
     "annotatedCodeLocation": {
       "description": "A code annotation that consists of single physical location and associated message, used to express code flows through a method, or other locations that are related to a result.",
       "additionalProperties": false,
@@ -137,22 +41,81 @@
         },
 
         "properties": {
-          "description": "Key/value pairs that provide additional details about the code location.",
+          "description": "Key/value pairs that provide additional information about the code location.",
           "type": "object",
           "default": { }
         },
 
         "tags": {
-          "description": "A unique set of strings that provide additional information for the code location.",
+          "description": "A unique set of strings that provide additional information about the code location.",
           "type": "array",
           "uniqueItems": true,
+          "default": [ ],
           "items": {
-            "type": "string",
-            "default": [ ]
+            "type": "string"
           }
         }
       },
       "required": [ "physicalLocation" ]
+    },
+    "codeFlow": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "A message relevant to the code flow",
+          "type": "string"
+        },
+        "locations": {
+          "description": "An array of 'annotatedCodeLocation' objects, each of which describes a single location visited by the tool in the course of producing the result.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/annotatedCodeLocation"
+          }
+        },
+        "properties": {
+          "description": "Key/value pairs that provide additional information about the code flow.",
+          "type": "object",
+          "default": { }
+        },
+        "tags": {
+          "description": "A unique set of strings that provide additional information about the code flow.",
+          "type": "array",
+          "uniqueItems": true,
+          "default": [ ],
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [ "locations" ]
+    },
+    "exception": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "A string that identifies the kind of exception, for example, the fully qualified type name of an object that was thrown, or the symbolic name of a signal."
+        },
+
+        "message": {
+          "type": "string",
+          "description": "A string that describes the exception."
+        },
+
+        "stack": {
+          "description": "The sequence of function calls leading to the exception.",
+          "$ref": "#/definitions/stack"
+        },
+
+        "innerExceptions": {
+          "type": "array",
+          "description": "An array of exception objects each of which is considered a cause of this exception.",
+          "items": {
+            "$ref": "#/definitions/exception"
+          }
+        }
+      }
     },
     "fileChange": {
       "description": "A change to a single file.",
@@ -223,9 +186,9 @@
           "description": "A set of distinct strings that provide additional information about the file.",
           "type": "array",
           "uniqueItems": true,
+          "default": [ ],
           "items": {
-            "type": "string",
-            "default": [ ]
+            "type": "string"
           }
         }
       }
@@ -241,7 +204,7 @@
         },
 
         "fileChanges": {
-          "description": "A message relevant to this annotation.",
+          "description": "One or more file changes that comprise a fix for a result.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/fileChange"
@@ -250,7 +213,7 @@
       },
       "required": [ "description", "fileChanges" ]
     },
-    "formattedMessage": {
+    "formattedRuleMessage": {
       "description": "Contains information that can be used to construct a formatted message that describes a result.",
       "additionalProperties": false,
       "type": "object",
@@ -282,10 +245,83 @@
 
         "algorithm": {
           "description": "A string specifying the name of the algorithm used to compute the hash value specified in the 'value' property.",
-          "enum": [ "Authentihash", "BLAKE-256", "BLAKE-512", "ECOH", "FSB", "GOST", "Groestl", "HAS-160", "HAVAL", "JH", "MD2", "MD4", "MD5", "MD6", "RadioGatun", "RIPEMD", "RIPEMD-128", "RIPEMD-160", "RIPEMD-320", "Sdhash", "SHA-1", "SHA-224", "SHA-256", "SHA-384", "SHA-512", "SHA-3", "Skein", "Snefru", "Spectral Hash", "Ssdeep", "SWIFFT", "Tiger", "Tlsh", "Whirlpool" ]
+          "enum": [ "authentihash", "blake256", "blake512", "ecoh", "fsb", "gost", "groestl", "has160", "haval", "jh", "md2", "md4", "md5", "md6", "radioGatun", "ripeMD", "ripeMD128", "ripeMD160", "ripeMD320", "sdhash", "sha1", "sha224", "sha256", "sha384", "sha512", "sha3", "skein", "snefru", "spectralHash", "ssdeep", "swifft", "tiger", "tlsh", "whirlpool" ]
         }
       },
       "required": [ "value", "algorithm" ]
+    },
+    "invocation": {
+      "description": "The runtime environment of the analysis tool run.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+
+        "commandLine": {
+          "description": "The command line used to invoke the tool.",
+          "type": "string"
+        },
+
+        "startTime": {
+          "description": "The date and time at which the run started. See \"Date/time properties\" in the SARIF spec for the required format.",
+          "type": "string",
+          "format": "date-time"
+        },
+
+        "endTime": {
+          "description": "The date and time at which the run ended. See \"Date/time properties\" in the  SARIF spec for the required format.",
+          "type": "string",
+          "format": "date-time"
+        },
+
+        "machine": {
+          "description": "The machine that hosted the analysis tool run.",
+          "type": "string"
+        },
+
+        "account": {
+          "description": "The account that ran the analysis tool.",
+          "type": "string"
+        },
+
+        "processId": {
+          "description": "The process id for the analysis tool run.",
+          "type": "integer"
+        },
+
+        "fileName": {
+          "description": "The fully qualified path to the analysis tool.",
+          "type": "string",
+          "default": { }
+        },
+
+        "workingDirectory": {
+          "description": "The working directory for the analysis rool run.",
+          "type": "string",
+          "default": { }
+        },
+
+        "environmentVariables": {
+          "description": "The environment variables associated with the analysis tool process, expressed as key/value pairs.",
+          "type": "object",
+          "default": { }
+        },
+
+        "properties": {
+          "description": "Key/value pairs that provide additional information about the run.",
+          "type": "object",
+          "default": { }
+        },
+
+        "tags": {
+          "description": "A set of distinct strings that provide additional information about the run.",
+          "type": "array",
+          "uniqueItems": true,
+          "default": [ ],
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "location": {
       "description": "The location where an analysis tool produced a result.",
@@ -322,9 +358,9 @@
           "description": "A set of distinct strings that provide additional information about the location.",
           "type": "array",
           "uniqueItems": true,
+          "default": [ ],
           "items": {
-            "type": "string",
-            "default": [ ]
+            "type": "string"
           }
         }
       }
@@ -344,6 +380,65 @@
           "type": "string"
         }
       }
+    },
+    "notification": {
+      "type": "object",
+      "description": "Describes a condition relevant to the tool itself, as opposed to being relevant to a target being analyzed by the tool.",
+      "properties": {
+        "id": {
+          "description": "An identifier for the condition that was encountered.",
+          "type": "string"
+        },
+
+        "ruleId": {
+          "description": "The stable, unique identifier of the rule (if any) to which this notification is relevant.",
+          "type": "string"
+        },
+
+        "analysisTarget": {
+          "description": "The analysis target (if any) to which this notification is relevant.",
+          "$ref": "#/definitions/physicalLocation"
+        },
+
+        "message": {
+          "description": "A string that describes the condition that was encountered.",
+          "type": "string"
+        },
+
+        "level": {
+          "description": "A value specifying the severity level of the notification.",
+          "default": "warning",
+          "enum": [ "note", "warning", "error" ]
+        },
+
+        "time": {
+          "description": "The date and time at which the analysis tool generated the notification.",
+          "type": "string",
+          "format": "date-time"
+        },
+
+        "exception": {
+          "description": "The runtime exception, if any, relevant to this notification.",
+          "$ref": "#/definitions/exception"
+        },
+
+        "properties": {
+          "description": "Key/value pairs that provide additional information about the notification.",
+          "type": "object",
+          "default": { }
+        },
+
+        "tags": {
+          "description": "A set of distinct strings that provide additional information about the notification.",
+          "type": "array",
+          "uniqueItems": true,
+          "default": [ ],
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [ "message" ]
     },
     "physicalLocation": {
       "description": "The physical location where a result was detected. Specifies a reference to a programming artifact together with a range of bytes or characters within that artifact.",
@@ -439,25 +534,20 @@
           "type": "string"
         },
 
-        "kind": {
+        "level": {
           "description": "The kind of observation this result represents. If this property is not present, its implied value is 'warning'.",
           "default": "warning",
-          "enum": [ "pass", "warning", "error", "notApplicable", "configurationError", "internalError", "note" ]
+          "enum": [ "notApplicable", "pass", "note", "warning", "error" ]
         },
 
-        "fullMessage": {
-          "description": "A string that describes the result.",
+        "message": {
+          "description": "A string that describes the result. The first sentence of the message only will be displayed when visible space is limited.",
           "type": "string"
         },
 
-        "shortMessage": {
-          "description": "A string that describes the result, displayed when visible space is limited to a single line of text.",
-          "type": "string"
-        },
-
-        "formattedMessage": {
-          "description": "A 'formattedMessage' object that can be used to construct a formatted message that describes the result. If the 'formattedMessage' property is present on a result, the 'fullMessage' property shall not be present. If the 'fullMessage' property is present on an result, the 'formattedMessage' property shall not be present",
-          "$ref": "#/definitions/formattedMessage"
+        "formattedRuleMessage": {
+          "description": "A 'formattedRuleMessage' object that can be used to construct a formatted message that describes the result. If the 'formattedMessage' property is present on a result, the 'fullMessage' property shall not be present. If the 'fullMessage' property is present on an result, the 'formattedMessage' property shall not be present",
+          "$ref": "#/definitions/formattedRuleMessage"
         },
 
         "locations": {
@@ -468,6 +558,11 @@
           "items": {
             "$ref": "#/definitions/location"
           }
+        },
+
+        "codeSnippet": {
+          "description": "A source code fragment that illustrates the result.",
+          "type": "string"
         },
 
         "toolFingerprint": {
@@ -486,15 +581,12 @@
         },
 
         "codeFlows": {
-          "description": "An array of arrays of 'annotatedCodeLocation` objects, each inner array of which comprises a code flow (a possible execution path through the code).",
+          "description": "An array of 'codeFlow' objects relevant to the result.",
           "type": "array",
           "minItems": 1,
+          "uniqueItems": true,
           "items": {
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "$ref": "#/definitions/annotatedCodeLocation"
-            }
+            "$ref": "#/definitions/codeFlow"
           }
         },
 
@@ -508,9 +600,24 @@
           }
         },
 
-        "isSuppressedInSource": {
-          "description": "A flag indicating whether or not this result was suppressed in source code.",
-          "type": "boolean"
+        "suppressionStates": {
+          "type": "array",
+          "items": {
+            "description": "A flag value indicating one or more suppression conditions.",
+            "enum": [
+              "suppressed",
+              "suppressedInSource"
+            ]
+          }
+        },
+
+        "baselineState": {
+          "description": "The state of a result relative to a baseline of a previous run.",
+          "enum": [
+            "new",
+            "existing",
+            "absent"
+          ]
         },
 
         "fixes": {
@@ -533,9 +640,9 @@
           "description": "A set of distinct strings that provide additional information about the result.",
           "type": "array",
           "uniqueItems": true,
+          "default": [ ],
           "items": {
-            "type": "string",
-            "default": [ ]
+            "type": "string"
           }
         }
       }
@@ -565,14 +672,15 @@
           "type": "string"
         },
 
-        "options": {
-          "description": "A dictionary consisting of a set of name/value pairs with arbitrary names. Describes the set of configurable options supported by the rule. The value within each name/value pair shall be a string, which may be the empty string. The value shall not be a dictionary or sub-object.",
-          "type": "object"
-        },
-
         "messageFormats": {
           "description": "A set of name/value pairs with arbitrary names. The value within each name/value pair shall consist of plain text interspersed with placeholders, which can be used to format a message in combination with an arbitrary number of additional string arguments.",
           "type": "object"
+        },
+
+        "defaultLevel": {
+          "description": "A value specifying the default severity level of the notification.",
+          "default": "warning",
+          "enum": [ "note", "notApplicable", "pass", "warning", "error" ]
         },
 
         "helpUri": {
@@ -591,9 +699,9 @@
           "description": "A set of distinct strings that provide additional information about the rule.",
           "type": "array",
           "uniqueItems": true,
+          "default": [ ],
           "items": {
-            "type": "string",
-            "default": [ ]
+            "type": "string"
           }
         }
       },
@@ -610,8 +718,8 @@
         },
 
         "invocation": {
-          "description": "A string containing the runtime parameters with which the tool was invoked. For command line tools, this string may consist of the completely specified command line used to invoke the tool.",
-          "type": "string"
+          "description": "Describes the runtime environment, including parameterization, of the analysis tool run.",
+          "$ref": "#/definitions/invocation"
         },
 
         "files": {
@@ -646,6 +754,22 @@
           }
         },
 
+        "toolNotifications": {
+          "description": "A list of runtime conditions detected by the tool in the course of the analysis.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/notification"
+          }
+        },
+
+        "configurationNotifications": {
+          "description": "A list of conditions detected by the tool that are relevant to the tool's configuration.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/notification"
+          }
+        },
+
         "rules": {
           "description": "A dictionary, each of whose keys is a string and each of whose values is a 'rule' object, that describe all rules associated with an analysis tool or a specific run of an analysis tool.",
           "type": "object",
@@ -654,36 +778,42 @@
           }
         },
 
-        "startTime": {
-          "description": "The date and time at which the run started. See \"Date/time properties\" in the SARIF spec for the required format.",
-          "type": "string",
-          "format": "date-time"
-        },
-
-        "endTime": {
-          "description": "The date and time at which the run ended. See \"Date/time properties\" in the  SARIF spec for the required format.",
-          "type": "string",
-          "format": "date-time"
+        "id": {
+          "description": "An identifier for the run.",
+          "type": "string"
         },
 
         "correlationId": {
-          "description": "An identifier that allows the run to be correlated with other artifacts produced by a larger automation process.",
+          "description": "A global identifier that allows the run to be correlated with other artifacts produced by a larger automation process.",
+          "type": "string"
+        }
+      },
+      "required": [ "tool" ]
+    },
+    "stack": {
+      "description": "A call stack that is relevant to a result.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "A message relevant to this call stack.",
           "type": "string"
         },
-
-        "architecture": {
-          "description": "An identifier that specifies the hardware architecture for which the run was targeted.",
-          "type": "string"
+        "frames": {
+          "description": "An array of stack frames that represent a sequence of calls, rendered in reverse chronological order, that comprise the call stack.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/stackFrame"
+          }
         },
-
         "properties": {
-          "description": "Key/value pairs that provide additional information about the run.",
+          "description": "Key/value pairs that provide additional information about the stack.",
           "type": "object",
           "default": { }
         },
-
         "tags": {
-          "description": "A set of distinct strings that provide additional information about the run.",
+          "description": "A unique set of strings that provide additional information about the stack.",
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -692,7 +822,73 @@
           }
         }
       },
-      "required": [ "tool" ]
+      "required": [ "frames" ]
+    },
+    "stackFrame": {
+      "description": "A function call within a stack trace.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "A message relevant to this stack frame.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "The uri of the source code file to which this stack frame refers.",
+          "type": "string",
+          "format": "uri"
+        },
+        "line": {
+          "description": "The line of the location to which this stack frame refers.",
+          "type": "integer"
+        },
+        "column": {
+          "description": "The line of the location to which this stack frame refers.",
+          "type": "integer"
+        },
+        "module": {
+          "description": "The name of the module that contains the code that is executing.",
+          "type": "string"
+        },
+        "fullyQualifiedLogicalName": {
+          "description": "The fully qualified name of the method or function that is executing.",
+          "type": "string"
+        },
+        "logicalLocationKey": {
+          "description": "A string used as a key into the logicalLocations dictionary, in case the string specified by 'fullyQualifiedLogicalName' is not unique.",
+          "type": "string"
+        },
+        "address": {
+          "description": "The address of the method or function that is executing.",
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The offset from the method or function that is executing.",
+          "type": "integer"
+        },
+        "parameters": {
+          "description": "The parameters of the call that is executing.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "default": [ ]
+          }
+        },
+        "properties": {
+          "description": "Key/value pairs that provide additional information about the stack frame.",
+          "type": "object",
+          "default": { }
+        },
+        "tags": {
+          "description": "A unique set of strings that provide additional information about the stack frame.",
+          "type": "array",
+          "uniqueItems": true,
+          "default": [ ],
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "tool": {
       "description": "The analysis tool that was run.",
@@ -725,6 +921,11 @@
           "pattern": "[0-9]+(\\.[0-9]+){3}"
         },
 
+        "language": {
+          "description": "The tool language (expressed as an ISO 649 two-letter lowercase culture code) and region (expressed as an ISO 3166 two-letter uppercase subculture code associated with a country or region).",
+          "type": "string"
+        },
+
         "properties": {
           "description": "Key/value pairs that provide additional information about the tool.",
           "type": "object",
@@ -735,9 +936,9 @@
           "description": "A set of distinct strings that provide additional information about the tool.",
           "type": "array",
           "uniqueItems": true,
+          "default": [ ],
           "items": {
-            "type": "string",
-            "default": [ ]
+            "type": "string"
           }
         }
       },

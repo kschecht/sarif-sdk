@@ -3,7 +3,6 @@
 
 using System;
 using System.Xml;
-using Microsoft.CodeAnalysis.Sarif.Sdk;
 
 namespace Microsoft.CodeAnalysis.Sarif.Converters
 {
@@ -34,7 +33,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
 
             if (lineStart <= 0)
             {
-                throw new ArgumentOutOfRangeException("lineStart", lineStart, SarifResources.FortifyBadLineNumber);
+                throw new ArgumentOutOfRangeException("lineStart", lineStart, SdkResources.FortifyBadLineNumber);
             }
 
             this.FilePath = filePath;
@@ -64,7 +63,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
 
             if (xmlReader.NodeType != XmlNodeType.Element || xmlReader.IsEmptyElement)
             {
-                throw xmlReader.CreateException(SarifResources.FortifyNotValidPathElement);
+                throw xmlReader.CreateException(SdkResources.FortifyNotValidPathElement);
             }
 
             int pathElementDepth = xmlReader.Depth;

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Composition;
 using System.IO;
 using System.Xml;
-using Microsoft.CodeAnalysis.Sarif.Sdk;
 using Microsoft.CodeAnalysis.Sarif.Writers;
 
 namespace Microsoft.CodeAnalysis.Sarif.Converters
@@ -165,8 +164,8 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
                 return new Result
                 {
                     RuleId = issueType,
-                    FullMessage = description,
-                    Locations = new HashSet<Location>
+                    Message = description,
+                    Locations = new List<Location>
                     {
                         new Location
                         {

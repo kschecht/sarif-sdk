@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
 using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Sarif
@@ -23,14 +22,14 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// <param name="tool">The tool information to write.</param>
         void WriteTool(Tool tool);
 
-        /// <summary>Writes run information to the log. These properties may appear after
+        /// <summary>Writes run information to the log. This object may appear after
         /// the results, as it can contain data that can't be computed (such as the run
         /// end time) until all results have been generated.</summary>
         /// <exception cref="IOException">A file IO error occured. Clients implementing
         /// <see cref="IToolFileConverter"/> should allow these exceptions to propagate.</exception>
-        /// <exception cref="InvalidOperationException">Thrown if the properties already been
+        /// <exception cref="InvalidOperationException">Thrown if the object has already been
         /// written.</exception>
-        void WriteRunProperties(string invocation, DateTime startTime, DateTime endTime, string correlationId, string architecture);
+        void WriteInvocation(Invocation invocation);
 
         /// <summary>
         /// Write information about scanned files to the log. This information may appear
@@ -124,5 +123,21 @@ namespace Microsoft.CodeAnalysis.Sarif
         ///  The results to write.
         ///  </param>
         void WriteResults(IEnumerable<Result> results);
+
+        /// <summary>
+        /// Write a set of notifications relevant to the operation of the tool to the log.
+        /// </summary>
+        /// <param name="notifications">
+        /// The notifications to write.
+        /// </param>
+        void WriteToolNotifications(IEnumerable<Notification> notifications);
+
+        /// <summary>
+        /// Write a set of notifications relevant to the configuration of the tool to the log.
+        /// </summary>
+        /// <param name="notifications">
+        /// The notifications to write.
+        /// </param>
+        void WriteConfigurationNotifications(IEnumerable<Notification> notifications);
     }
 }

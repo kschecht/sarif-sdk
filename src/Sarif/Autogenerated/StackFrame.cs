@@ -12,9 +12,14 @@ namespace Microsoft.CodeAnalysis.Sarif
     /// A function call within a stack trace.
     /// </summary>
     [DataContract]
-    [GeneratedCode("Microsoft.Json.Schema.ToDotNet", "0.16.0.0")]
-    public partial class StackFrame : ISarifNode, IEquatable<StackFrame>
+    [GeneratedCode("Microsoft.Json.Schema.ToDotNet", "0.22.0.0")]
+    public partial class StackFrame : ISarifNode
     {
+        public static IEqualityComparer<StackFrame> ValueComparer => StackFrameEqualityComparer.Instance;
+
+        public bool ValueEquals(StackFrame other) => ValueComparer.Equals(this, other);
+        public int ValueGetHashCode() => ValueComparer.GetHashCode(this);
+
         /// <summary>
         /// Gets a value indicating the type of object implementing <see cref="ISarifNode" />.
         /// </summary>
@@ -87,210 +92,16 @@ namespace Microsoft.CodeAnalysis.Sarif
         public IList<string> Parameters { get; set; }
 
         /// <summary>
-        /// Key/value pairs that provide additional details about the stack frame.
+        /// Key/value pairs that provide additional information about the stack frame.
         /// </summary>
         [DataMember(Name = "properties", IsRequired = false, EmitDefaultValue = false)]
         public IDictionary<string, string> Properties { get; set; }
 
         /// <summary>
-        /// A unique set of strings that provide additional information for the stack frame.
+        /// A unique set of strings that provide additional information about the stack frame.
         /// </summary>
         [DataMember(Name = "tags", IsRequired = false, EmitDefaultValue = false)]
-        public ISet<string> Tags { get; set; }
-
-        public override bool Equals(object other)
-        {
-            return Equals(other as StackFrame);
-        }
-
-        public override int GetHashCode()
-        {
-            int result = 17;
-            unchecked
-            {
-                if (Message != null)
-                {
-                    result = (result * 31) + Message.GetHashCode();
-                }
-
-                if (Uri != null)
-                {
-                    result = (result * 31) + Uri.GetHashCode();
-                }
-
-                result = (result * 31) + Line.GetHashCode();
-                result = (result * 31) + Column.GetHashCode();
-                if (Module != null)
-                {
-                    result = (result * 31) + Module.GetHashCode();
-                }
-
-                if (FullyQualifiedLogicalName != null)
-                {
-                    result = (result * 31) + FullyQualifiedLogicalName.GetHashCode();
-                }
-
-                if (LogicalLocationKey != null)
-                {
-                    result = (result * 31) + LogicalLocationKey.GetHashCode();
-                }
-
-                result = (result * 31) + Address.GetHashCode();
-                result = (result * 31) + Offset.GetHashCode();
-                if (Parameters != null)
-                {
-                    foreach (var value_0 in Parameters)
-                    {
-                        result = result * 31;
-                        if (value_0 != null)
-                        {
-                            result = (result * 31) + value_0.GetHashCode();
-                        }
-                    }
-                }
-
-                if (Properties != null)
-                {
-                    // Use xor for dictionaries to be order-independent.
-                    int xor_0 = 0;
-                    foreach (var value_1 in Properties)
-                    {
-                        xor_0 ^= value_1.Key.GetHashCode();
-                        if (value_1.Value != null)
-                        {
-                            xor_0 ^= value_1.Value.GetHashCode();
-                        }
-                    }
-
-                    result = (result * 31) + xor_0;
-                }
-
-                if (Tags != null)
-                {
-                    foreach (var value_2 in Tags)
-                    {
-                        result = result * 31;
-                        if (value_2 != null)
-                        {
-                            result = (result * 31) + value_2.GetHashCode();
-                        }
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        public bool Equals(StackFrame other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (Message != other.Message)
-            {
-                return false;
-            }
-
-            if (Uri != other.Uri)
-            {
-                return false;
-            }
-
-            if (Line != other.Line)
-            {
-                return false;
-            }
-
-            if (Column != other.Column)
-            {
-                return false;
-            }
-
-            if (Module != other.Module)
-            {
-                return false;
-            }
-
-            if (FullyQualifiedLogicalName != other.FullyQualifiedLogicalName)
-            {
-                return false;
-            }
-
-            if (LogicalLocationKey != other.LogicalLocationKey)
-            {
-                return false;
-            }
-
-            if (Address != other.Address)
-            {
-                return false;
-            }
-
-            if (Offset != other.Offset)
-            {
-                return false;
-            }
-
-            if (!Object.ReferenceEquals(Parameters, other.Parameters))
-            {
-                if (Parameters == null || other.Parameters == null)
-                {
-                    return false;
-                }
-
-                if (Parameters.Count != other.Parameters.Count)
-                {
-                    return false;
-                }
-
-                for (int index_0 = 0; index_0 < Parameters.Count; ++index_0)
-                {
-                    if (Parameters[index_0] != other.Parameters[index_0])
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            if (!Object.ReferenceEquals(Properties, other.Properties))
-            {
-                if (Properties == null || other.Properties == null || Properties.Count != other.Properties.Count)
-                {
-                    return false;
-                }
-
-                foreach (var value_0 in Properties)
-                {
-                    string value_1;
-                    if (!other.Properties.TryGetValue(value_0.Key, out value_1))
-                    {
-                        return false;
-                    }
-
-                    if (value_0.Value != value_1)
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            if (!Object.ReferenceEquals(Tags, other.Tags))
-            {
-                if (Tags == null || other.Tags == null)
-                {
-                    return false;
-                }
-
-                if (!Tags.SetEquals(other.Tags))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
+        public IList<string> Tags { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StackFrame" /> class.
@@ -338,7 +149,7 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// <param name="tags">
         /// An initialization value for the <see cref="P: Tags" /> property.
         /// </param>
-        public StackFrame(string message, Uri uri, int line, int column, string module, string fullyQualifiedLogicalName, string logicalLocationKey, int address, int offset, IEnumerable<string> parameters, IDictionary<string, string> properties, ISet<string> tags)
+        public StackFrame(string message, Uri uri, int line, int column, string module, string fullyQualifiedLogicalName, string logicalLocationKey, int address, int offset, IEnumerable<string> parameters, IDictionary<string, string> properties, IEnumerable<string> tags)
         {
             Init(message, uri, line, column, module, fullyQualifiedLogicalName, logicalLocationKey, address, offset, parameters, properties, tags);
         }
@@ -380,7 +191,7 @@ namespace Microsoft.CodeAnalysis.Sarif
             return new StackFrame(this);
         }
 
-        private void Init(string message, Uri uri, int line, int column, string module, string fullyQualifiedLogicalName, string logicalLocationKey, int address, int offset, IEnumerable<string> parameters, IDictionary<string, string> properties, ISet<string> tags)
+        private void Init(string message, Uri uri, int line, int column, string module, string fullyQualifiedLogicalName, string logicalLocationKey, int address, int offset, IEnumerable<string> parameters, IDictionary<string, string> properties, IEnumerable<string> tags)
         {
             Message = message;
             if (uri != null)
@@ -413,7 +224,7 @@ namespace Microsoft.CodeAnalysis.Sarif
 
             if (tags != null)
             {
-                var destination_1 = new HashSet<string>();
+                var destination_1 = new List<string>();
                 foreach (var value_1 in tags)
                 {
                     destination_1.Add(value_1);

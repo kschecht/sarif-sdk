@@ -9,7 +9,6 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using Microsoft.CodeAnalysis.Sarif.Driver;
-using Microsoft.CodeAnalysis.Sarif.Sdk;
 using Microsoft.CodeAnalysis.Sarif.Writers;
 
 namespace Microsoft.CodeAnalysis.Sarif.Converters
@@ -114,11 +113,11 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
 
             if (messageComponents.Count == 0)
             {
-                result.FullMessage = String.Format(CultureInfo.InvariantCulture, SarifResources.FortifyFallbackMessage, result.RuleId);
+                result.Message = String.Format(CultureInfo.InvariantCulture, SdkResources.FortifyFallbackMessage, result.RuleId);
             }
             else
             {
-                result.FullMessage = String.Join(Environment.NewLine, messageComponents);
+                result.Message = String.Join(Environment.NewLine, messageComponents);
             }
 
             var extraProperties = new Dictionary<string, string>();
@@ -142,7 +141,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             result.Properties = extraProperties;
 
             PhysicalLocation primaryOrSink = ConvertFortifyLocationToPhysicalLocation(fortify.PrimaryOrSink);
-            result.Locations = new HashSet<Location>
+            result.Locations = new List<Location>
             {
                 new Location
                 {
@@ -153,12 +152,15 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             if (fortify.Source != null)
             {
                 PhysicalLocation source = ConvertFortifyLocationToPhysicalLocation(fortify.Source);
-                result.CodeFlows = new[]
+                result.CodeFlows = new List<CodeFlow>
                 {
-                    new[]
+                    new CodeFlow
                     {
-                        new AnnotatedCodeLocation { PhysicalLocation = source },
-                        new AnnotatedCodeLocation { PhysicalLocation = primaryOrSink }
+                        Locations = new List<AnnotatedCodeLocation>
+                        {
+                            new AnnotatedCodeLocation { PhysicalLocation = source },
+                            new AnnotatedCodeLocation { PhysicalLocation = primaryOrSink }
+                        }
                     }
                 };
             }

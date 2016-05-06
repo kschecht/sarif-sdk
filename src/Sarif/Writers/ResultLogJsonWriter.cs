@@ -3,10 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 using Microsoft.CodeAnalysis.Sarif.Readers;
-using Microsoft.CodeAnalysis.Sarif.Sdk;
 
 using Newtonsoft.Json;
 
@@ -27,9 +25,11 @@ namespace Microsoft.CodeAnalysis.Sarif.Writers
             FilesWritten = 0x8,
             ResultsInitialized = 0x10,
             ResultsClosed = 0x20,
-            RunPropertiesWritten = 0x40,
+            InvocationWritten = 0x40,
             LogicalLocationsWritten = 0x80,
-            Disposed = 0x100
+            ToolNotificationsWritten = 0x100,
+            ConfigurationNotificationsWritten = 0x200,
+            Disposed = 0x40000000
         }
 
         private Conditions _writeConditions;
@@ -50,9 +50,13 @@ namespace Microsoft.CodeAnalysis.Sarif.Writers
         {
             this.EnsureStateNotAlreadySet(Conditions.Disposed | Conditions.Initialized);
 
+            SarifVersion sarifVersion = SarifVersion.OneZeroZeroBetaFour;
+
             _jsonWriter.WriteStartObject(); // Begin: sarifLog
+            _jsonWriter.WritePropertyName("$schema");
+            _jsonWriter.WriteValue(sarifVersion.ConvertToSchemaUri().OriginalString);
             _jsonWriter.WritePropertyName("version");
-            _jsonWriter.WriteValue(SarifVersion.OneZeroZeroBetaThree.ConvertToText());
+            _jsonWriter.WriteValue(sarifVersion.ConvertToText());
 
             _jsonWriter.WritePropertyName("runs");
             _jsonWriter.WriteStartArray(); // Begin: runs
@@ -151,7 +155,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Writers
             EnsureStateNotAlreadySet(Conditions.Disposed | Conditions.RulesWritten);
 
             _jsonWriter.WritePropertyName("rules");
-            _serializer.Serialize(_jsonWriter, rules, typeof(Dictionary<string, Rule>));
+            _serializer.Serialize(_jsonWriter, rules, typeof(Dictionary<string, IRule>));
 
             _writeConditions |= Conditions.RulesWritten;
         }
@@ -248,41 +252,55 @@ namespace Microsoft.CodeAnalysis.Sarif.Writers
             _writeConditions |= Conditions.ResultsClosed;
         }
 
-        public void WriteRunProperties(string invocation, DateTime startTime, DateTime endTime, string correlationId, string architecture)
+        public void WriteInvocation(Invocation invocation)
         {
+            if (invocation == null)
+            {
+                throw new ArgumentNullException(nameof(invocation));
+            }
+
             EnsureInitialized();
             EnsureResultsArrayIsNotOpen();
-            EnsureStateNotAlreadySet(Conditions.Disposed | Conditions.RunPropertiesWritten);
+            EnsureStateNotAlreadySet(Conditions.Disposed | Conditions.InvocationWritten);
 
-            if (!string.IsNullOrEmpty(invocation))
+            _jsonWriter.WritePropertyName("invocation");
+            _serializer.Serialize(_jsonWriter, invocation, typeof(Invocation));
+
+            _writeConditions |= Conditions.InvocationWritten;
+        }
+
+        public void WriteToolNotifications(IEnumerable<Notification> notifications)
+        {
+            if (notifications == null)
             {
-                _jsonWriter.WritePropertyName(nameof(invocation));
-                _jsonWriter.WriteValue(invocation);
+                throw new ArgumentNullException(nameof(notifications));
             }
 
-            if (startTime != new DateTime())
+            EnsureInitialized();
+            EnsureResultsArrayIsNotOpen();
+            EnsureStateNotAlreadySet(Conditions.Disposed | Conditions.ToolNotificationsWritten);
+
+            _jsonWriter.WritePropertyName("toolNotifications");
+            _serializer.Serialize(_jsonWriter, notifications, notifications.GetType());
+
+            _writeConditions |= Conditions.ToolNotificationsWritten;
+        }
+
+        public void WriteConfigurationNotifications(IEnumerable<Notification> notifications)
+        {
+            if (notifications == null)
             {
-                _jsonWriter.WritePropertyName(nameof(startTime));
-                _jsonWriter.WriteValue(startTime);
+                throw new ArgumentNullException(nameof(notifications));
             }
 
-            if (endTime != new DateTime())
-            {
-                _jsonWriter.WritePropertyName(nameof(endTime));
-                _jsonWriter.WriteValue(endTime);
-            }
+            EnsureInitialized();
+            EnsureResultsArrayIsNotOpen();
+            EnsureStateNotAlreadySet(Conditions.Disposed | Conditions.ConfigurationNotificationsWritten);
 
-            if (!string.IsNullOrEmpty(correlationId))
-            {
-                _jsonWriter.WritePropertyName(nameof(correlationId));
-                _jsonWriter.WriteValue(correlationId);
-            }
+            _jsonWriter.WritePropertyName("configurationNotifications");
+            _serializer.Serialize(_jsonWriter, notifications, notifications.GetType());
 
-            if (!string.IsNullOrEmpty(architecture))
-            {
-                _jsonWriter.WritePropertyName(nameof(architecture));
-                _jsonWriter.WriteValue(architecture);
-            }
+            _writeConditions |= Conditions.ConfigurationNotificationsWritten;
         }
 
         /// <summary>Writes the log footer and closes the underlying <see cref="JsonWriter"/>.</summary>
@@ -332,7 +350,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Writers
             if (observedInvalidConditions != Conditions.None)
             {
                 // 	InvalidState	One or more invalid states were detected during serialization: {0}	
-                throw new InvalidOperationException(string.Format(SarifResources.InvalidState, observedInvalidConditions));
+                throw new InvalidOperationException(string.Format(SdkResources.InvalidState, observedInvalidConditions));
             }
         }
 
@@ -344,7 +362,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Writers
             if ((_writeConditions & Conditions.ResultsInitialized) == Conditions.ResultsInitialized &&
                 (_writeConditions & Conditions.ResultsClosed) != Conditions.ResultsClosed)
             {
-                throw new InvalidOperationException(SarifResources.ResultsSerializationNotComplete);
+                throw new InvalidOperationException(SdkResources.ResultsSerializationNotComplete);
             }
         }
     }

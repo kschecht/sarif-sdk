@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
-using Microsoft.CodeAnalysis.Sarif;
 
 namespace Microsoft.CodeAnalysis.Sarif.Readers
 {
@@ -10,14 +9,14 @@ namespace Microsoft.CodeAnalysis.Sarif.Readers
     {
         public ResultDiffingVisitor(SarifLog sarifLog)
         {
-            this.AbsentResults = new HashSet<Result>();
-            this.SharedResults = new HashSet<Result>();
-            this.NewResults    = new HashSet<Result>();
+            this.AbsentResults = new HashSet<Result>(Result.ValueComparer);
+            this.SharedResults = new HashSet<Result>(Result.ValueComparer);
+            this.NewResults = new HashSet<Result>(Result.ValueComparer);
 
             VisitSarifLog(sarifLog);
         }
 
-        public HashSet<Result> NewResults    { get; set; }
+        public HashSet<Result> NewResults { get; set; }
         public HashSet<Result> AbsentResults { get; set; }
         public HashSet<Result> SharedResults { get; set; }
 
@@ -32,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Readers
 
             this.AbsentResults = this.SharedResults;
 
-            this.SharedResults = new HashSet<Result>();
+            this.SharedResults = new HashSet<Result>(Result.ValueComparer);
 
             foreach (Result result in this.NewResults)
             {
@@ -41,24 +40,26 @@ namespace Microsoft.CodeAnalysis.Sarif.Readers
 
             this.NewResults.Clear();
 
-            foreach (Result result in actual)
+            if (actual != null)
             {
-                if (this.AbsentResults.Contains(result))
+                foreach (Result result in actual)
                 {
-                    this.SharedResults.Add(result);
-                    this.AbsentResults.Remove(result);
-                }
-                else
-                {
-                    this.NewResults.Add(result);
+                    if (this.AbsentResults.Contains(result))
+                    {
+                        this.SharedResults.Add(result);
+                        this.AbsentResults.Remove(result);
+                    }
+                    else
+                    {
+                        this.NewResults.Add(result);
+                    }
                 }
             }
 
-            return 
+            return
                 this.AbsentResults.Count == 0 &&
                 this.NewResults.Count == 0;
-       
+
         }
     }
-
 }

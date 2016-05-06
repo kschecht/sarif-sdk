@@ -1,12 +1,25 @@
 {
-  "Rule.Options": [
+  "AnnotatedCodeLocation.Properties": [
     {
       "kind": "DictionaryHint"
     }
   ],
-  "AnnotatedCodeLocation.Properties": [
+  "CodeFlow.Properties": [
     {
-      "kind": "DictionaryHint" 
+      "kind": "DictionaryHint"
+    }
+  ],
+  "exception": [
+    {
+      "kind": "ClassNameHint",
+      "arguments": {
+        "className": "ExceptionData"
+      }
+    }
+  ],
+  "ExceptionData.Properties": [
+    {
+      "kind": "DictionaryHint"
     }
   ],
   "file": [
@@ -27,9 +40,60 @@
       "kind": "DictionaryHint"
     }
   ],
+  "Notification.Properties": [
+    {
+      "kind": "DictionaryHint"
+    }
+  ],
+  "Result.BaselineState": [
+    {
+      "kind": "EnumHint",
+      "arguments": {
+        "typeName": "BaselineState",
+        "description": "The state of a result relative to a baseline of a previous run.",
+        "zeroValue": "None",
+        "enumValues": [
+          "Existing",
+          "New",
+          "Absent"
+        ]
+      }
+    }
+  ],
+  "Result.SuppressionStates": [
+    {
+      "kind": "EnumHint",
+      "arguments": {
+        "typeName": "SuppressionStates",
+        "description": "The state of a result relative to a baseline of a previous run.",
+        "zeroValue": "None",
+        "enumValues": [
+          "SuppressedInSource",
+          "SuppressedInBaseline"
+        ]
+      }
+    }
+  ],
   "Result.Properties": [
     {
       "kind": "DictionaryHint"
+    }
+  ],
+  "Rule.DefaultLevel": [
+    {
+      "kind": "EnumHint",
+      "arguments": {
+        "typeName": "ResultLevel",
+        "description": "Values specifying the level of a result.",
+        "zeroValue": "Unknown",
+        "enumValues": [
+          "NotApplicable",
+          "Pass",
+          "Note",
+          "Warning",
+          "Error"
+        ]
+      }
     }
   ],
   "Rule.MessageFormats": [
@@ -54,10 +118,15 @@
   ],
   "Run.Properties": [
     {
-      "kind": "DictionaryHint" 
+      "kind": "DictionaryHint"
     }
   ],
   "Run.Rules": [
+    {
+      "kind": "DictionaryHint"
+    }
+  ],
+  "Invocation.EnvironmentVariables": [
     {
       "kind": "DictionaryHint"
     }
@@ -78,14 +147,14 @@
         "description": "Possible values for the SARIF schema version.",
         "zeroValue": "Unknown",
         "enumValues": [
-          "OneZeroZeroBetaThree"
+          "OneZeroZeroBetaFour"
         ]
       }
     }
   ],
   "Stack.Properties": [
     {
-      "kind": "DictionaryHint" 
+      "kind": "DictionaryHint"
     }
   ],
   "StackFrame.Properties": [
@@ -139,21 +208,34 @@
       }
     }
   ],
-  "Result.Kind": [
+  "Notification.Level": [
     {
       "kind": "EnumHint",
       "arguments": {
-        "typeName": "ResultKind",
-        "description": "Values specifying the category of the result.",
+        "typeName": "NotificationLevel",
+        "description": "Values specifying the level of a notification.",
         "zeroValue": "Unknown",
         "enumValues": [
-          "Error",
+          "Note",
           "Warning",
+          "Error"
+        ]
+      }
+    }
+  ],
+  "Result.Level": [
+    {
+      "kind": "EnumHint",
+      "arguments": {
+        "typeName": "ResultLevel",
+        "description": "Values specifying the level of a result.",
+        "zeroValue": "Unknown",
+        "enumValues": [
+          "NotApplicable",
           "Pass",
           "Note",
-          "NotApplicable",
-          "InternalError",
-          "ConfigurationError"
+          "Warning",
+          "Error"
         ]
       }
     }

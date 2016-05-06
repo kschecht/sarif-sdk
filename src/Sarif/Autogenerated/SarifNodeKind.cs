@@ -8,7 +8,7 @@ namespace Microsoft.CodeAnalysis.Sarif
     /// <summary>
     /// A set of values for all the types that implement <see cref="ISarifNode" />.
     /// </summary>
-    [GeneratedCode("Microsoft.Json.Schema.ToDotNet", "0.16.0.0")]
+    [GeneratedCode("Microsoft.Json.Schema.ToDotNet", "0.22.0.0")]
     public enum SarifNodeKind
     {
         /// <summary>
@@ -20,17 +20,17 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// </summary>
         SarifLog,
         /// <summary>
-        /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="Stack" />.
-        /// </summary>
-        Stack,
-        /// <summary>
-        /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="StackFrame" />.
-        /// </summary>
-        StackFrame,
-        /// <summary>
         /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="AnnotatedCodeLocation" />.
         /// </summary>
         AnnotatedCodeLocation,
+        /// <summary>
+        /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="CodeFlow" />.
+        /// </summary>
+        CodeFlow,
+        /// <summary>
+        /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="ExceptionData" />.
+        /// </summary>
+        ExceptionData,
         /// <summary>
         /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="FileChange" />.
         /// </summary>
@@ -44,13 +44,17 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// </summary>
         Fix,
         /// <summary>
-        /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="FormattedMessage" />.
+        /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="FormattedRuleMessage" />.
         /// </summary>
-        FormattedMessage,
+        FormattedRuleMessage,
         /// <summary>
         /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="Hash" />.
         /// </summary>
         Hash,
+        /// <summary>
+        /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="Invocation" />.
+        /// </summary>
+        Invocation,
         /// <summary>
         /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="Location" />.
         /// </summary>
@@ -59,6 +63,10 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="LogicalLocationComponent" />.
         /// </summary>
         LogicalLocationComponent,
+        /// <summary>
+        /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="Notification" />.
+        /// </summary>
+        Notification,
         /// <summary>
         /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="PhysicalLocation" />.
         /// </summary>
@@ -83,6 +91,14 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="Run" />.
         /// </summary>
         Run,
+        /// <summary>
+        /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="Stack" />.
+        /// </summary>
+        Stack,
+        /// <summary>
+        /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="StackFrame" />.
+        /// </summary>
+        StackFrame,
         /// <summary>
         /// A value indicating that the <see cref="ISarifNode" /> object is of type <see cref="Tool" />.
         /// </summary>

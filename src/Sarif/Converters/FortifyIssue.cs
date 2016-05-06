@@ -8,7 +8,6 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Xml;
 using Microsoft.CodeAnalysis.Sarif.Driver;
-using Microsoft.CodeAnalysis.Sarif.Sdk;
 
 namespace Microsoft.CodeAnalysis.Sarif.Converters
 {
@@ -154,7 +153,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             //</xs:element>
             if (!xmlReader.IsStartElement(strings.Issue))
             {
-                throw xmlReader.CreateException(SarifResources.FortifyNotValidResult);
+                throw xmlReader.CreateException(SdkResources.FortifyNotValidResult);
             }
 
             string iid = null;

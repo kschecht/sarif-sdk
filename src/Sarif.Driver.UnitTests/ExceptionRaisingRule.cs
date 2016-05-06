@@ -3,9 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.CodeAnalysis.Sarif.Sdk;
 
-namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
+namespace Microsoft.CodeAnalysis.Sarif.Driver
 {
     internal class ExceptionRaisingRule : IRule, ISkimmer<TestAnalysisContext>
     {
@@ -38,6 +37,8 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
                 return ExceptionRaisingRuleId;
             }
         }
+
+        public ResultLevel DefaultLevel {  get { return ResultLevel.Warning; } }
 
         public string Name
         {
@@ -88,7 +89,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
             }
         }
 
-        public ISet<string> Tags
+        public IList<string> Tags
         {
             get
             {
@@ -105,12 +106,19 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
 
             if (_exceptionCondition == ExceptionCondition.ParsingTarget)
             {
-                Errors.LogTargetParseError(context, null, "Could not parse target.");
+                Errors.LogTargetParseError(
+                    context,
+                    new Region
+                    {
+                        StartLine = 42,
+                        StartColumn = 54
+                    },
+                    "Could not parse target.");
             }
 
             if (_exceptionCondition == ExceptionCondition.LoadingPdb)
             {
-                Errors.LogExceptionLoadingPdb(context, new InvalidOperationException("Test message").Message);
+                Errors.LogExceptionLoadingPdb(context, new InvalidOperationException("Test message"));
             }
         }
 

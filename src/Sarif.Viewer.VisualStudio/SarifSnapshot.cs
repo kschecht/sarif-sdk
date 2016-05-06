@@ -3,22 +3,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
+
 using EnvDTE;
+
 using Microsoft.CodeAnalysis.Sarif;
-using Microsoft.CodeAnalysis.Sarif.Driver;
-using Microsoft.CodeAnalysis.Sarif.Driver.Sdk;
-using Microsoft.CodeAnalysis.Sarif.Writers;
-using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Imaging.Interop;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Shell.TableControl;
 using Microsoft.VisualStudio.Shell.TableManager;
-using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace Microsoft.Sarif.Viewer
 {
@@ -79,11 +73,11 @@ namespace Microsoft.Sarif.Viewer
                 }
                 else if (columnName == StandardTableKeyNames.ErrorSeverity)
                 {
-                    content = GetSeverity(_errors[index].Kind);
+                    content = GetSeverity(_errors[index].Level);
                 }
                 else if (columnName == StandardTableKeyNames.Priority)
                 {
-                    content = GetSeverity(_errors[index].Kind) == __VSERRORCATEGORY.EC_ERROR
+                    content = GetSeverity(_errors[index].Level) == __VSERRORCATEGORY.EC_ERROR
                         ? vsTaskPriority.vsTaskPriorityHigh
                         : vsTaskPriority.vsTaskPriorityMedium;
                 }
@@ -144,23 +138,21 @@ namespace Microsoft.Sarif.Viewer
             return content != null;
         }
 
-        private __VSERRORCATEGORY GetSeverity(ResultKind kind)
+        private __VSERRORCATEGORY GetSeverity(ResultLevel level)
         {
-            switch (kind)
+            switch (level)
             {
-                case ResultKind.ConfigurationError:
-                case ResultKind.InternalError:
-                case ResultKind.Error:
+                case ResultLevel.Error:
                 {
                     return __VSERRORCATEGORY.EC_ERROR;
                 }
-                case ResultKind.Warning:
+                case ResultLevel.Warning:
                 {
                     return __VSERRORCATEGORY.EC_WARNING;
                 }
-                case ResultKind.NotApplicable:
-                case ResultKind.Pass:
-                case ResultKind.Note:
+                case ResultLevel.NotApplicable:
+                case ResultLevel.Pass:
+                case ResultLevel.Note:
                 {
                     return __VSERRORCATEGORY.EC_MESSAGE;
                 }

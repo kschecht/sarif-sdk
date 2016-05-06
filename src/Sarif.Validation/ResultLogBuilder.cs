@@ -3,9 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.CodeAnalysis.Sarif.Driver;
-using Microsoft.CodeAnalysis.Sarif.Driver.Sdk;
+using Microsoft.CodeAnalysis.Sarif.Writers;
 
 namespace Microsoft.CodeAnalysis.Sarif.Validation
 {
@@ -30,7 +29,6 @@ namespace Microsoft.CodeAnalysis.Sarif.Validation
             Name = "UnknownError",
             ShortDescription = Resources.UnknownErrorRuleDescription,
             FullDescription = Resources.UnknownErrorRuleDescription,
-            Options = null,
             MessageFormats = new Dictionary<string, string>
             {
                 [UnknownErrorFormatSpecifier] = Resources.UnknownErrorMessageFormat
@@ -78,9 +76,10 @@ namespace Microsoft.CodeAnalysis.Sarif.Validation
 
             _logger = new SarifLogger(
                 outputFilePath,
-                verbose: true,
                 analysisTargets: new[] { instanceFilePath, schemaFilePath },
+                verbose: true,
                 computeTargetsHash: false,
+                logEnvironment: false,
                 prereleaseInfo: null,
                 invocationTokensToRedact:null);
 
@@ -177,8 +176,8 @@ namespace Microsoft.CodeAnalysis.Sarif.Validation
             {
                 case JsonErrorKind.Syntax:
                     result.RuleId = JsonSyntaxErrorRule.Id;
-                    result.Kind = ResultKind.Error;
-                    result.FormattedMessage = new FormattedMessage
+                    result.Level = ResultLevel.Error;
+                    result.FormattedRuleMessage = new FormattedRuleMessage
                     {
                         FormatId = JsonSyntaxErrorFormatSpecifier,
                         Arguments = new[] { error.Message }
@@ -187,8 +186,8 @@ namespace Microsoft.CodeAnalysis.Sarif.Validation
 
                 case JsonErrorKind.Validation:
                     result.RuleId = JsonSchemaValidationErrorRule.Id;
-                    result.Kind = ResultKind.Error;
-                    result.FormattedMessage = new FormattedMessage
+                    result.Level = ResultLevel.Error;
+                    result.FormattedRuleMessage = new FormattedRuleMessage
                     {
                         FormatId = JsonSchemaValidationErrorFormatSpecifier,
                         Arguments = new[] { error.Message }
@@ -197,8 +196,8 @@ namespace Microsoft.CodeAnalysis.Sarif.Validation
 
                 default:
                     result.RuleId = UnknownErrorRule.Id;
-                    result.Kind = ResultKind.InternalError;
-                    result.FormattedMessage = new FormattedMessage
+                    result.Level = ResultLevel.Error;
+                    result.FormattedRuleMessage = new FormattedRuleMessage
                     {
                         FormatId = UnknownErrorFormatSpecifier,
                         Arguments = new string[] { error.Kind.ToString() }
@@ -231,7 +230,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Validation
                 }
             };
 
-            result.Locations = new HashSet<Location> { location };
+            result.Locations = new List<Location> { location };
 
             return result;
         }

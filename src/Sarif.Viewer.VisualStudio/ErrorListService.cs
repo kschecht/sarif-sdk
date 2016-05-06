@@ -4,12 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 
 using Microsoft.CodeAnalysis.Sarif;
-using Microsoft.CodeAnalysis.Sarif.Driver;
-using Microsoft.CodeAnalysis.Sarif.Driver.Sdk;
 using Microsoft.CodeAnalysis.Sarif.Readers;
 using Microsoft.CodeAnalysis.Sarif.Writers;
 
@@ -124,17 +121,20 @@ namespace Microsoft.Sarif.Viewer
                     foreach (Location location in result?.Locations)
                     {
                         region = null;
+                        Uri uri;
 
                         PhysicalLocation physicalLocation = null;
                         if (location.ResultFile != null)
                         {
                             physicalLocation = location.ResultFile;
-                            document = physicalLocation.Uri.LocalPath;
+                            uri = physicalLocation.Uri;
+                            document = uri.IsAbsoluteUri ? uri.LocalPath : uri.ToString();
                             region = physicalLocation.Region;
                         }
                         else if (location.AnalysisTarget != null)
                         {
                             physicalLocation = location.AnalysisTarget;
+                            uri = physicalLocation.Uri;
                             document = physicalLocation.Uri.LocalPath;
                             region = physicalLocation.Region;
                         }
@@ -175,7 +175,7 @@ namespace Microsoft.Sarif.Viewer
                 Region = region,
                 RuleId = result.RuleId,
                 RuleName = rule?.Name,
-                Kind = result.Kind,
+                Level = result.Level,
                 Category = category,
                 ShortMessage = shortMessage,
                 FullMessage = fullMessage,
@@ -183,10 +183,11 @@ namespace Microsoft.Sarif.Viewer
                 HelpLink = rule?.HelpUri?.ToString()
             };
 
-            IEnumerable<IEnumerable<AnnotatedCodeLocation>> stackLocations = CreateAnnotationsFromStacks(result.Stacks);
+            IEnumerable<IEnumerable<AnnotatedCodeLocation>> stackLocations = CreateAnnotatedCodeLocationsFromStacks(result.Stacks);
+            IEnumerable<IEnumerable<AnnotatedCodeLocation>> codeFlowLocations = CreateAnnotatedCodeLocationsFromCodeFlows(result.CodeFlows);
 
             CreateAnnotatedCodeLocationCollections(stackLocations, AnnotatedCodeLocationKind.Stack, sarifError);
-            CreateAnnotatedCodeLocationCollections(result.CodeFlows, AnnotatedCodeLocationKind.CodeFlow, sarifError);
+            CreateAnnotatedCodeLocationCollections(codeFlowLocations, AnnotatedCodeLocationKind.CodeFlow, sarifError);
             CaptureAnnotatedCodeLocations(result.RelatedLocations, AnnotatedCodeLocationKind.Stack, sarifError);
 
             if (region != null)
@@ -198,8 +199,10 @@ namespace Microsoft.Sarif.Viewer
             sarifErrors.Add(sarifError);
         }
 
-        private IEnumerable<IEnumerable<AnnotatedCodeLocation>> CreateAnnotationsFromStacks(IEnumerable<Stack> stacks)
+        private IEnumerable<IEnumerable<AnnotatedCodeLocation>> CreateAnnotatedCodeLocationsFromStacks(IEnumerable<Stack> stacks)
         {
+            if (stacks == null) { return null; }
+
             List<List<AnnotatedCodeLocation>> codeLocationCollections = new List<List<AnnotatedCodeLocation>>();
 
             foreach (Stack stack in stacks)
@@ -229,15 +232,28 @@ namespace Microsoft.Sarif.Viewer
             return codeLocationCollections;
         }
 
+        private IEnumerable<IEnumerable<AnnotatedCodeLocation>> CreateAnnotatedCodeLocationsFromCodeFlows(IEnumerable<CodeFlow> codeFlows)
+        {
+            if (codeFlows == null) { return null; }
+
+            List<List<AnnotatedCodeLocation>> codeLocationCollections = new List<List<AnnotatedCodeLocation>>();
+
+            foreach (CodeFlow codeFlow in codeFlows)
+            {
+                if (codeFlow.Locations == null) { continue; }
+
+                var codeLocations = new List<AnnotatedCodeLocation>(codeFlow.Locations);
+                codeLocationCollections.Add(codeLocations);
+            }
+            return codeLocationCollections;
+        }
+
         private static void CreateAnnotatedCodeLocationCollections(
             IEnumerable<IEnumerable<AnnotatedCodeLocation>> codeLocationCollections, 
             AnnotatedCodeLocationKind annotatedCodeLocationKind,
             SarifError sarifError)
         {
-            if (codeLocationCollections == null)
-            {
-                return;
-            }
+            if (codeLocationCollections == null) { return; }
 
             foreach (IEnumerable<AnnotatedCodeLocation> codeLocations in codeLocationCollections)
             {
@@ -270,12 +286,9 @@ namespace Microsoft.Sarif.Viewer
             }
         }
 
-        private static bool IsError(ResultKind kind)
+        private static bool IsError(ResultLevel level)
         {
-            return 
-                kind == ResultKind.ConfigurationError ||
-                kind == ResultKind.Error ||
-                kind == ResultKind.InternalError;
+            return level == ResultLevel.Error;
         }
     }
 }

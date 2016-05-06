@@ -188,12 +188,13 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
         {
             var context = TestHelper.CreateProjectContext();
 
-            context.RefineMessage("CA0000", "VeryUsefulCheck", "1", "MyCategory", "Breaking");
+            context.RefineMessage("CA0000", "VeryUsefulCheck", "1", "MyCategory", "Breaking", "ExcludedInSource");
             Assert.AreEqual("CA0000", context.CheckId);
             Assert.AreEqual("1", context.MessageId);
             Assert.AreEqual("MyCategory", context.Category);
             Assert.AreEqual("VeryUsefulCheck", context.Typename);
             Assert.AreEqual("Breaking", context.FixCategory);
+            Assert.AreEqual("ExcludedInSource", context.Status);
         }
 
         [TestMethod]
@@ -221,7 +222,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             context.RefineNamespace("mynamespace");
             context.RefineType("mytype");
             context.RefineMember("mymember(string)");
-            context.RefineMessage("CA0000", "VeryUsefulCheck", "1", "MyCategory", "Breaking");
+            context.RefineMessage("CA0000", "VeryUsefulCheck", "1", "MyCategory", "Breaking", "Excluded");
             context.RefineIssue("hello!", "test", "25", "error", "source", "myfile.cs", 13);
 
             Assert.AreEqual("mybinary.dll", context.Target);
@@ -240,6 +241,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             Assert.AreEqual("error", context.Level);
             Assert.AreEqual("source", context.Path);
             Assert.AreEqual("myfile.cs", context.File);
+            Assert.AreEqual("Excluded", context.Status);
             Assert.AreEqual(13, context.Line.Value);
 
             context.ClearTarget();
@@ -260,7 +262,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             context.RefineTarget("mybinary.dll");
             context.RefineModule("mybinary.dll");
             context.RefineResource("myresource.resx");
-            context.RefineMessage("CA0000", "VeryUsefulCheck", "1", "MyCategory", "Breaking");
+            context.RefineMessage("CA0000", "VeryUsefulCheck", "1", "MyCategory", "Breaking", null);
 
             context.RefineIssue("hello!", "test", "25", "error", "source", "myresource.resx", 13);
             Assert.AreEqual("mybinary.dll", context.Target);
@@ -276,6 +278,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             Assert.AreEqual("25", context.Certainty);
             Assert.AreEqual("error", context.Level);
             Assert.AreEqual("source", context.Path);
+            Assert.AreEqual(null, context.Status);
             Assert.AreEqual("myresource.resx", context.File);
             Assert.AreEqual(13, context.Line.Value);
 
@@ -365,7 +368,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             context.RefineNamespace("mynamespace");
             context.RefineType("mytype");
             context.RefineMember("mymember(string)");
-            context.RefineMessage("CA0000", "VeryUsefulCheck", "1", "FakeCategory", "Breaking");
+            context.RefineMessage("CA0000", "VeryUsefulCheck", "1", "FakeCategory", "Breaking", "ExcludedInSource");
             context.RefineIssue("hello!", "test", "uncertain", "error", @"source", "myfile.cs", 13);
 
             string expectedLogicalLocation = "mynamespace.mytype.mymember(string)";
@@ -373,10 +376,10 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             var expectedResult = new Result
             {
                 RuleId = "CA0000",
-                ShortMessage = "VeryUsefulCheck",
-                FullMessage = "hello!",
+                Message = "hello!",
                 ToolFingerprint = "1#test",
-                Locations = new HashSet<Location>
+                SuppressionStates = SuppressionStates.SuppressedInSource,
+                Locations = new List<Location>
                 {
                     new Location
                     {
@@ -427,11 +430,14 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             var converter = new FxCopConverter();
             Result result = converter.CreateResult(context);
 
-            result.Should().Be(expectedResult);
+            result.ValueEquals(expectedResult).Should().BeTrue();
 
             converter.LogicalLocationsDictionary.Keys.Should().ContainSingle(expectedLogicalLocation);
             var actualLogicalLocationComponents = converter.LogicalLocationsDictionary[expectedLogicalLocation];
-            actualLogicalLocationComponents.Should().Equal(expectedLogicalLocationComponents);
+            actualLogicalLocationComponents.SequenceEqual(
+                    expectedLogicalLocationComponents,
+                    LogicalLocationComponent.ValueComparer)
+                .Should().BeTrue();
         }
 
         [TestMethod]
@@ -443,7 +449,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             context.RefineNamespace("mynamespace");
             context.RefineType("mytype");
             context.RefineMember("mymember(string)");
-            context.RefineMessage("CA0000", "VeryUsefulCheck", null, null, null);
+            context.RefineMessage("CA0000", "VeryUsefulCheck", null, null, null, null);
             context.RefineIssue("hello!", null, null, null, null, null, null);
 
             var expectedLogicalLocation = "mynamespace.mytype.mymember(string)";
@@ -483,11 +489,14 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             var converter = new FxCopConverter();
             Result result = converter.CreateResult(context);
 
-            result.Locations.Should().Equal(expectedLocations);
+            result.Locations.SequenceEqual(expectedLocations, Location.ValueComparer).Should().BeTrue();
 
             converter.LogicalLocationsDictionary.Keys.Should().ContainSingle(expectedLogicalLocation);
             var actualLogicalLocationComponents = converter.LogicalLocationsDictionary[expectedLogicalLocation];
-            actualLogicalLocationComponents.Should().Equal(expectedLogicalLocationComponents);
+            actualLogicalLocationComponents.SequenceEqual(
+                    expectedLogicalLocationComponents,
+                    LogicalLocationComponent.ValueComparer)
+                .Should().BeTrue();
         }
 
         [TestMethod]
@@ -498,7 +507,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             context.RefineTarget(@"mybinary.dll");
             context.RefineModule("mybinary.dll");
             context.RefineResource("myresource.resx");
-            context.RefineMessage("CA0000", "VeryUsefulCheck", null, null, null);
+            context.RefineMessage("CA0000", "VeryUsefulCheck", null, null, null, null);
             context.RefineIssue("hello!", "test", null, null, @"source", "myfile.cs", 13);
 
             var expectedLogicalLocation = "myresource.resx";
@@ -537,11 +546,14 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             var converter = new FxCopConverter();
             Result result = converter.CreateResult(context);
 
-            result.Locations.Should().Equal(expectedLocations);
+            result.Locations.SequenceEqual(expectedLocations, Location.ValueComparer).Should().BeTrue();
 
             converter.LogicalLocationsDictionary.Keys.Should().ContainSingle(expectedLogicalLocation);
             var actualLogicalLocationComponents = converter.LogicalLocationsDictionary[expectedLogicalLocation];
-            actualLogicalLocationComponents.Should().Equal(expectedLogicalLocationComponents);
+            actualLogicalLocationComponents.SequenceEqual(
+                    expectedLogicalLocationComponents,
+                    LogicalLocationComponent.ValueComparer)
+                .Should().BeTrue();
         }
 
         [TestMethod]
@@ -551,7 +563,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
 
             context.RefineTarget(@"mybinary.dll");
             context.RefineResource("myresource.resx");
-            context.RefineMessage("CA0000", "VeryUsefulCheck", null, null, null);
+            context.RefineMessage("CA0000", "VeryUsefulCheck", null, null, null, null);
             context.RefineIssue("hello!", "test", null, null, null, null, null);
 
             var converter = new FxCopConverter();

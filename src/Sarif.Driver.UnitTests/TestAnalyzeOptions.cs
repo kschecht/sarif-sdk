@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
+namespace Microsoft.CodeAnalysis.Sarif.Driver
 {
     public class TestAnalyzeOptions : IAnalyzeOptions
     {
@@ -13,6 +13,8 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
         }
 
         public bool ComputeTargetsHash { get; set; }
+
+        public bool LogEnvironment { get; set; }
 
         public string OutputFilePath { get; set; }
 

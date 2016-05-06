@@ -1,5 +1,6 @@
 {
-  "version": "1.0.0-beta.3",
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0-beta.4",
   "runs": [
     {
       "tool": {
@@ -66,8 +67,7 @@
       "results": [
         {
           "ruleId": "CA904",
-          "fullMessage": "Redefine the types in namespace 'SecurityCryptographyRuleTests' in the Microsoft or System namespace. Public types that will never ship externally can be defined in the MS namespace. Consider disabling this rule when analyzing code that does not ship externally.",
-          "shortMessage": "DeclareTypesInMicrosoftOrSystemNamespace",
+          "message": "Redefine the types in namespace 'SecurityCryptographyRuleTests' in the Microsoft or System namespace. Public types that will never ship externally can be defined in the MS namespace. Consider disabling this rule when analyzing code that does not ship externally.",
           "locations": [
             {
               "fullyQualifiedLogicalName": "SecurityCryptographyRuleTests"
@@ -81,8 +81,7 @@
         },
         {
           "ruleId": "CA1014",
-          "fullMessage": "Mark 'SecurityCryptographyRuleTests.dll' with CLSCompliant(true) because it exposes externally visible types.",
-          "shortMessage": "MarkAssembliesWithClsCompliant",
+          "message": "Mark 'SecurityCryptographyRuleTests.dll' with CLSCompliant(true) because it exposes externally visible types.",
           "locations": [
             {
               "analysisTarget": {
@@ -99,8 +98,7 @@
         },
         {
           "ruleId": "CA1709",
-          "fullMessage": "Correct the casing of 'DES' in type name 'DESCannotBeUsed' by changing it to 'Des'.",
-          "shortMessage": "IdentifiersShouldBeCasedCorrectly",
+          "message": "Correct the casing of 'DES' in type name 'DESCannotBeUsed' by changing it to 'Des'.",
           "locations": [
             {
               "analysisTarget": {
@@ -118,8 +116,7 @@
         },
         {
           "ruleId": "CA1053",
-          "fullMessage": "Because type 'DESCannotBeUsed' contains only 'static' members, mark it as 'static' to prevent the compiler from adding a default public constructor.",
-          "shortMessage": "StaticHolderTypesShouldNotHaveConstructors",
+          "message": "Because type 'DESCannotBeUsed' contains only 'static' members, mark it as 'static' to prevent the compiler from adding a default public constructor.",
           "locations": [
             {
               "analysisTarget": {
@@ -137,8 +134,7 @@
         },
         {
           "ruleId": "CA1811",
-          "fullMessage": "'DESCannotBeUsed.EncryptData(string, string, byte[], byte[])' appears to have no upstream public or protected callers.",
-          "shortMessage": "AvoidUncalledPrivateCode",
+          "message": "'DESCannotBeUsed.EncryptData(string, string, byte[], byte[])' appears to have no upstream public or protected callers.",
           "locations": [
             {
               "analysisTarget": {

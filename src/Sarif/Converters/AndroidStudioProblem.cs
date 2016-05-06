@@ -6,7 +6,6 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Xml;
 using Microsoft.CodeAnalysis.Sarif.Driver;
-using Microsoft.CodeAnalysis.Sarif.Sdk;
 
 namespace Microsoft.CodeAnalysis.Sarif.Converters
 {
@@ -50,22 +49,22 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
         {
             if (b.ProblemClass == null)
             {
-                throw new ArgumentException(SarifResources.AndroidStudioProblemMissingProblemClass);
+                throw new ArgumentException(SdkResources.AndroidStudioProblemMissingProblemClass);
             }
 
             if (b.Line != 0 && b.File == null)
             {
-                throw new ArgumentException(SarifResources.AndroidStudioFileMissing);
+                throw new ArgumentException(SdkResources.AndroidStudioFileMissing);
             }
 
             if (b.File == null && b.Module == null && b.Package == null && b.EntryPointName == null)
             {
-                throw new ArgumentException(SarifResources.AndroidStudioHasNoLocationInformation);
+                throw new ArgumentException(SdkResources.AndroidStudioHasNoLocationInformation);
             }
 
             if ((b.EntryPointName == null) != (b.EntryPointType == null))
             {
-                throw new ArgumentException(SarifResources.AndroidStudioEntryPointMissingRequiredData);
+                throw new ArgumentException(SdkResources.AndroidStudioEntryPointMissingRequiredData);
             }
 
             this.File = b.File;
@@ -142,7 +141,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
         {
             if (!reader.IsStartElement(strings.Problem))
             {
-                throw reader.CreateException(SarifResources.AndroidStudioNotProblemElement);
+                throw reader.CreateException(SdkResources.AndroidStudioNotProblemElement);
             }
 
             Builder b = new Builder();
@@ -266,13 +265,13 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
                 {
                     if (!Ref.Equal(reader.LocalName, strings.Hint))
                     {
-                        throw reader.CreateException(SarifResources.AndroidStudioHintsElementContainedNonHint);
+                        throw reader.CreateException(SdkResources.AndroidStudioHintsElementContainedNonHint);
                     }
 
                     string hintContent = reader.GetAttribute(strings.Value);
                     if (hintContent == null)
                     {
-                        throw reader.CreateException(SarifResources.AndroidStudioHintElementMissingValue);
+                        throw reader.CreateException(SdkResources.AndroidStudioHintElementMissingValue);
                     }
 
                     if (hintContent.Length != 0)

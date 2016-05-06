@@ -1,5 +1,6 @@
 {
-  "version": "1.0.0-beta.3",
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0-beta.4",
   "runs": [
     {
       "tool": {
@@ -8,17 +9,16 @@
         "version": "7.0.7000.0",
         "semanticVersion": "7.0.7000",
         "fileVersion": "7.0.20811.0",
+        "language": "en-US",
         "properties": {
-          "Language": "Language Neutral",
-          "FileName": "D:\\src\\SecDevTools\\Main\\bin\\x64\\Release\\ModernCop\\mod50.exe",
           "CompanyName": "Microsoft Corporation"
         }
       },
       "results": [
         {
           "ruleId": "M1001",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "enterpriseAuthentication"
@@ -37,8 +37,8 @@
         },
         {
           "ruleId": "M1001",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "privateNetworkClientServer"
@@ -57,8 +57,8 @@
         },
         {
           "ruleId": "M1001",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "sharedUserCertificates"
@@ -77,8 +77,8 @@
         },
         {
           "ruleId": "WEB1080",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "img",
@@ -100,8 +100,8 @@
         },
         {
           "ruleId": "WEB1080",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "img",
@@ -123,8 +123,8 @@
         },
         {
           "ruleId": "WEB1088",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error"
           },
           "locations": [
@@ -141,8 +141,8 @@
         },
         {
           "ruleId": "WEB1080",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "img",
@@ -164,8 +164,8 @@
         },
         {
           "ruleId": "WEB1080",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "div",
@@ -187,8 +187,8 @@
         },
         {
           "ruleId": "WEB1080",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "img",
@@ -210,8 +210,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "Object.prototype",
@@ -232,8 +232,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "Object.prototype",
@@ -254,8 +254,8 @@
         },
         {
           "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "args",
@@ -277,8 +277,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "Object.prototype",
@@ -299,8 +299,8 @@
         },
         {
           "ruleId": "JS3057",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "string",
@@ -320,439 +320,9 @@
           ]
         },
         {
-          "ruleId": "JS2027",
-          "kind": "warning",
-          "formattedMessage": {
-            "formatId": "Warning"
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 1
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS2073",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "microsoft",
-              "http://go.microsoft.com/fwlink/?LinkID=286574"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 6,
-                  "startColumn": 3
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS2073",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "fwlink",
-              "http://go.microsoft.com/fwlink/?LinkID=286574"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 6,
-                  "startColumn": 17
-                }
-              }
-            }
-          ]
-        },
-        {
           "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "nav",
-              "variable",
-              "nav"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 8,
-                  "startColumn": 7
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "sched",
-              "variable",
-              "sched"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 9,
-                  "startColumn": 7
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "WinJS.Utilities",
-              "Scheduler"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 9,
-                  "startColumn": 33
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS3053",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "WinJS.Application.addEventListener",
-              "2"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 12,
-                  "startColumn": 8
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "args",
-              "parameter",
-              "args"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 12,
-                  "startColumn": 37
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS2045",
-          "kind": "warning",
-          "formattedMessage": {
-            "formatId": "Warning"
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 14,
-                  "startColumn": 11
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "WinJS.Application",
-              "sessionState"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 22,
-                  "startColumn": 31
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "Object.prototype",
-              "current"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 23,
-                  "startColumn": 25
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS3053",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "WinJS.UI.processAll",
-              "0"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 27,
-                  "startColumn": 23
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "WinJS.Promise",
-              "then"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 27,
-                  "startColumn": 37
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS3047",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error"
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 39,
-                  "startColumn": 3
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "WinJS.Application",
-              "insecureFunction"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 39,
-                  "startColumn": 9
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS3058",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "input"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 39,
-                  "startColumn": 26
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS2001",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "window.eval",
-              ""
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 41,
-                  "startColumn": 7
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "args",
-              "parameter",
-              "args"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 44,
-                  "startColumn": 22
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "WinJS.Application",
-              "sessionState"
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 49,
-                  "startColumn": 13
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS2073",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": [
-              "args",
-              "suspended, call args.setPromise()."
-            ]
-          },
-          "locations": [
-            {
-              "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
-                "region": {
-                  "startLine": 54,
-                  "startColumn": 121
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "nav",
@@ -774,8 +344,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "WinJS.Application",
@@ -796,8 +366,8 @@
         },
         {
           "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "util",
@@ -819,8 +389,8 @@
         },
         {
           "ruleId": "JS3058",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "Data"
@@ -840,8 +410,8 @@
         },
         {
           "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "args",
@@ -863,8 +433,8 @@
         },
         {
           "ruleId": "JS3047",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error"
           },
           "locations": [
@@ -881,8 +451,8 @@
         },
         {
           "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "args",
@@ -904,8 +474,8 @@
         },
         {
           "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "args",
@@ -927,8 +497,8 @@
         },
         {
           "ruleId": "JS3057",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "string",
@@ -949,8 +519,8 @@
         },
         {
           "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "args",
@@ -972,8 +542,8 @@
         },
         {
           "ruleId": "JS3057",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "string",
@@ -993,19 +563,61 @@
           ]
         },
         {
-          "ruleId": "JS3054",
-          "kind": "error",
-          "formattedMessage": {
-            "formatId": "Error",
-            "arguments": []
+          "ruleId": "JS2027",
+          "level": "warning",
+          "formattedRuleMessage": {
+            "formatId": "Warning"
           },
           "locations": [
             {
               "analysisTarget": {
-                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/data.js",
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
                 "region": {
-                  "startLine": 44,
-                  "startColumn": 5
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS2073",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "microsoft",
+              "http://go.microsoft.com/fwlink/?LinkID=286574"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 6,
+                  "startColumn": 3
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS2073",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "fwlink",
+              "http://go.microsoft.com/fwlink/?LinkID=286574"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 6,
+                  "startColumn": 17
                 }
               }
             }
@@ -1013,8 +625,377 @@
         },
         {
           "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "nav",
+              "variable",
+              "nav"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS2074",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "sched",
+              "variable",
+              "sched"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS3092",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "WinJS.Utilities",
+              "Scheduler"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 33
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS3053",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "WinJS.Application.addEventListener",
+              "2"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 8
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS2074",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "args",
+              "parameter",
+              "args"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 37
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS2045",
+          "level": "warning",
+          "formattedRuleMessage": {
+            "formatId": "Warning"
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS3092",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "WinJS.Application",
+              "sessionState"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 31
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS3092",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "Object.prototype",
+              "current"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 25
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS3053",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "WinJS.UI.processAll",
+              "0"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 23
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS3092",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "WinJS.Promise",
+              "then"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 37
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS3047",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error"
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 3
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS3092",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "WinJS.Application",
+              "insecureFunction"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 9
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS3058",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "input"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 26
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS2001",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "window.eval",
+              ""
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 41,
+                  "startColumn": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS2074",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "args",
+              "parameter",
+              "args"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 44,
+                  "startColumn": 22
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS3092",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "WinJS.Application",
+              "sessionState"
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 49,
+                  "startColumn": 13
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS2073",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": [
+              "args",
+              "suspended, call args.setPromise()."
+            ]
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js",
+                "region": {
+                  "startLine": 54,
+                  "startColumn": 121
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS2074",
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "nav",
@@ -1036,8 +1017,8 @@
         },
         {
           "ruleId": "JS3053",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "WinJS.Class.define",
@@ -1058,8 +1039,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "<anonymous object>",
@@ -1080,8 +1061,8 @@
         },
         {
           "ruleId": "JS3053",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "WinJS.Navigation.removeEventListener",
@@ -1102,8 +1083,8 @@
         },
         {
           "ruleId": "JS2023",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1120,8 +1101,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "that",
@@ -1142,8 +1123,8 @@
         },
         {
           "ruleId": "JS2023",
-          "kind": "warning",
-          "formattedMessage": {
+          "level": "warning",
+          "formattedRuleMessage": {
             "formatId": "Warning"
           },
           "locations": [
@@ -1160,8 +1141,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "that",
@@ -1182,8 +1163,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "that",
@@ -1204,8 +1185,8 @@
         },
         {
           "ruleId": "JS3058",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "Application"
@@ -1225,8 +1206,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "WinJS.Promise",
@@ -1247,8 +1228,8 @@
         },
         {
           "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "Viewstate",
@@ -1270,8 +1251,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "pageControl",
@@ -1292,8 +1273,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "pageControl",
@@ -1314,8 +1295,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "pageElement",
@@ -1336,8 +1317,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "<anonymous object>",
@@ -1358,8 +1339,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "WinJS.Utilities",
@@ -1380,8 +1361,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "<anonymous object>",
@@ -1402,8 +1383,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "window",
@@ -1424,8 +1405,8 @@
         },
         {
           "ruleId": "JS3057",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "pageControl",
@@ -1446,8 +1427,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "pageControl",
@@ -1468,8 +1449,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "pageControl",
@@ -1490,8 +1471,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "pageElement",
@@ -1512,8 +1493,8 @@
         },
         {
           "ruleId": "JS3053",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "WinJS.UI.Animation.enterPage",
@@ -1534,8 +1515,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "WinJS.Promise",
@@ -1556,8 +1537,8 @@
         },
         {
           "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "args",
@@ -1579,8 +1560,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "Object.prototype",
@@ -1601,8 +1582,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "WinJS.Promise",
@@ -1623,8 +1604,8 @@
         },
         {
           "ruleId": "JS3053",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "WinJS.UI.Pages.render",
@@ -1645,8 +1626,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "that.pageElement",
@@ -1667,8 +1648,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "that.pageElement",
@@ -1689,8 +1670,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "that.pageElement",
@@ -1711,8 +1692,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "that.pageElement",
@@ -1733,8 +1714,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "that.pageElement",
@@ -1755,8 +1736,8 @@
         },
         {
           "ruleId": "JS2074",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "args",
@@ -1778,8 +1759,8 @@
         },
         {
           "ruleId": "JS3057",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "that.pageControl",
@@ -1800,8 +1781,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "that.pageControl",
@@ -1822,8 +1803,8 @@
         },
         {
           "ruleId": "JS3092",
-          "kind": "error",
-          "formattedMessage": {
+          "level": "error",
+          "formattedRuleMessage": {
             "formatId": "Error",
             "arguments": [
               "that.pageControl",
@@ -1837,6 +1818,25 @@
                 "region": {
                   "startLine": 117,
                   "startColumn": 42
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "JS3054",
+          "level": "error",
+          "formattedRuleMessage": {
+            "formatId": "Error",
+            "arguments": []
+          },
+          "locations": [
+            {
+              "analysisTarget": {
+                "uri": "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/data.js",
+                "region": {
+                  "startLine": 44,
+                  "startColumn": 5
                 }
               }
             }
@@ -1905,15 +1905,6 @@
             "mimeType": "text/javascript"
           }
         ],
-        "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js": [
-          {
-            "mimeType": "application/octet-stream"
-          },
-          {
-            "uri": "/js/default.js",
-            "mimeType": "text/javascript"
-          }
-        ],
         "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/pages/hub/hub.js": [
           {
             "mimeType": "application/octet-stream"
@@ -1923,12 +1914,12 @@
             "mimeType": "text/javascript"
           }
         ],
-        "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/data.js": [
+        "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/default.js": [
           {
             "mimeType": "application/octet-stream"
           },
           {
-            "uri": "/js/data.js",
+            "uri": "/js/default.js",
             "mimeType": "text/javascript"
           }
         ],
@@ -1938,6 +1929,15 @@
           },
           {
             "uri": "/js/navigator.js",
+            "mimeType": "text/javascript"
+          }
+        ],
+        "file:///d:/src/SecDevTools/Main/src/ModernCop/Source/Mod50.Test.Unit/ModernCopTestData/Mod50/CompiledPackages/SimpleJSApp.appxbundle#/js/data.js": [
+          {
+            "mimeType": "application/octet-stream"
+          },
+          {
+            "uri": "/js/data.js",
             "mimeType": "text/javascript"
           }
         ]
@@ -2014,6 +2014,29 @@
             "semantic"
           ]
         },
+        "JS3058": {
+          "id": "JS3058",
+          "name": "DeclareVariablesBeforeUse",
+          "shortDescription": "Declare variables explicitly before use.",
+          "messageFormats": {
+            "Error": "Variable '{0}' undeclared. This error must be resolved before further semantic analysis can be done."
+          },
+          "tags": [
+            "js",
+            "semantic"
+          ]
+        },
+        "JS3047": {
+          "id": "JS3047",
+          "name": "ProvideExplicitSemicolons",
+          "shortDescription": "Provide explicit semicolons.",
+          "messageFormats": {
+            "Error": "Provide an explicit semicolon."
+          },
+          "tags": [
+            "js"
+          ]
+        },
         "JS2027": {
           "id": "JS2027",
           "name": "PunctuateCommentsCorrectly",
@@ -2060,29 +2083,6 @@
             "js"
           ]
         },
-        "JS3047": {
-          "id": "JS3047",
-          "name": "ProvideExplicitSemicolons",
-          "shortDescription": "Provide explicit semicolons.",
-          "messageFormats": {
-            "Error": "Provide an explicit semicolon."
-          },
-          "tags": [
-            "js"
-          ]
-        },
-        "JS3058": {
-          "id": "JS3058",
-          "name": "DeclareVariablesBeforeUse",
-          "shortDescription": "Declare variables explicitly before use.",
-          "messageFormats": {
-            "Error": "Variable '{0}' undeclared. This error must be resolved before further semantic analysis can be done."
-          },
-          "tags": [
-            "js",
-            "semantic"
-          ]
-        },
         "JS2001": {
           "id": "JS2001",
           "name": "DoNotUseEval",
@@ -2093,6 +2093,17 @@
           "tags": [
             "js",
             "sdl"
+          ]
+        },
+        "JS2023": {
+          "id": "JS2023",
+          "name": "UseDoubleQuotesForStringLiterals",
+          "shortDescription": "Use double quotes where possible to declare string literals.",
+          "messageFormats": {
+            "Warning": "Use double quotes where possible to declare string literals. For string literals that represent HTML snippets, encapsulate embedded attribute names using single quotes."
+          },
+          "tags": [
+            "js"
           ]
         },
         "JS3054": {
@@ -2106,22 +2117,16 @@
             "js",
             "semantic"
           ]
-        },
-        "JS2023": {
-          "id": "JS2023",
-          "name": "UseDoubleQuotesForStringLiterals",
-          "shortDescription": "Use double quotes where possible to declare string literals.",
-          "messageFormats": {
-            "Warning": "Use double quotes where possible to declare string literals. For string literals that represent HTML snippets, encapsulate embedded attribute names using single quotes."
-          },
-          "tags": [
-            "js"
-          ]
         }
       },
-      "invocation": "mod50  analyze /appx d:\\src\\SecDevTools\\Main\\src\\ModernCop\\Source\\Mod50.Test.Unit\\ModernCopTestData\\Mod50\\CompiledPackages\\SimpleJSApp.appxbundle /out d:\\src\\sarif-sdk\\src\\Sarif.FunctionalTests\\DirectProducerTestData\\WebSkim\\SimpleDBundleoubleNesting.sarif",
-      "startTime": "2016-04-22T20:43:06.6084406Z",
-      "endTime": "2016-04-22T20:43:08.5794285Z"
+      "invocation": {
+        "commandLine": "D:\\src\\SecDevTools\\Main\\bin\\x64\\Debug\\ModernCop\\mod50.exe  analyze /appx d:\\src\\SecDevTools\\Main\\src\\ModernCop\\Source\\Mod50.Test.Unit\\ModernCopTestData\\Mod50\\CompiledPackages\\SimpleJSApp.appxbundle /out .\\SimpleBundleDoubleNesting.sarif",
+        "startTime": "2016-05-04T23:03:25.66Z",
+        "endTime": "2016-05-04T23:03:27.53Z",
+        "processId": 45000,
+        "fileName": "D:\\src\\SecDevTools\\Main\\bin\\x64\\Debug\\ModernCop\\mod50.exe",
+        "workingDirectory": "d:\\src\\sarif-sdk\\src\\Sarif.FunctionalTests\\DirectProducerTestData\\WebSkim"
+      }
     }
   ]
 }

@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security;
-using Microsoft.CodeAnalysis.Sarif.Sdk;
+using Microsoft.CodeAnalysis.Sarif.Writers;
 
-namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
+namespace Microsoft.CodeAnalysis.Sarif.Driver
 {
     public abstract class AnalyzeCommandBase<TContext, TOptions> : PlugInDriverCommand<TOptions>
         where TContext : IAnalysisContext, new()
@@ -236,11 +236,12 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
                     () => aggregatingLogger.Loggers.Add(
                             new SarifLogger(
                                 analyzeOptions.OutputFilePath,
-                                analyzeOptions.Verbose,
                                 targets,
+                                analyzeOptions.Verbose,
+                                analyzeOptions.LogEnvironment,
                                 analyzeOptions.ComputeTargetsHash,
                                 Prerelease,
-                                invocationTokensToRedact : null)),
+                                invocationTokensToRedact : GenerateSensitiveTokensList())),
                     (ex) =>
                     {
                         Errors.LogExceptionCreatingLogFile(context, filePath, ex);
@@ -248,6 +249,23 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
                     }
                 );
             }
+        }
+
+        private IEnumerable<string> GenerateSensitiveTokensList()
+        {
+            var result = new List<String>();
+
+            result.Add(Environment.MachineName);
+            result.Add(Environment.UserName);
+            result.Add(Environment.UserDomainName);
+
+            string userDnsDomain = Environment.GetEnvironmentVariable("USERDNSDOMAIN");
+            string logonServer = Environment.GetEnvironmentVariable("LOGONSERVER");
+
+            if (!string.IsNullOrEmpty(userDnsDomain)) { result.Add(userDnsDomain); }
+            if (!string.IsNullOrEmpty(logonServer)) { result.Add(logonServer); }
+
+            return result;
         }
 
         public void InvokeCatchingRelevantIOExceptions(Action action, Action<Exception> exceptionHandler)
@@ -423,7 +441,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver.Sdk
         {
             RuntimeErrors |= context.RuntimeErrors;
 
-            throw new ExitApplicationException<ExitReason>(SdkResources.MSG_UnexpectedApplicationExit, innerException)
+            throw new ExitApplicationException<ExitReason>(DriverResources.MSG_UnexpectedApplicationExit, innerException)
             {
                 ExitReason = exitReason
             };

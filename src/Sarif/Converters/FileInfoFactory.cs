@@ -51,9 +51,9 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
 
                 if (result.CodeFlows != null)
                 {
-                    foreach (IList<AnnotatedCodeLocation> codeFlow in result.CodeFlows)
+                    foreach (CodeFlow codeFlow in result.CodeFlows)
                     {
-                        foreach (AnnotatedCodeLocation codeLocation in codeFlow)
+                        foreach (AnnotatedCodeLocation codeLocation in codeFlow.Locations)
                         {
                             AddFile(codeLocation.PhysicalLocation);
                         }
@@ -74,7 +74,15 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
 
         private void AddFile(PhysicalLocation physicalLocation)
         {
-            string key = physicalLocation.Uri.ToString();
+            Uri uri = physicalLocation.Uri;
+            string key = uri.ToString();
+            string filePath = key;
+
+            if (uri.IsAbsoluteUri && uri.IsFile)
+            {
+                filePath = uri.LocalPath;
+            }
+
 
             if (!_fileInfoDictionary.ContainsKey(key))
             {
@@ -84,7 +92,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
                     {
                         new FileData
                         {
-                            MimeType = _mimeTypeClassifier(key)
+                            MimeType = _mimeTypeClassifier(filePath)
                         }
                     });
             }

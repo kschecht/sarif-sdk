@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.Sarif
     /// <summary>
     /// Interface exposed by objects that provide information about analysis rules.
     /// </summary>
-    [GeneratedCode("Microsoft.Json.Schema.ToDotNet", "0.16.0.0")]
+    [GeneratedCode("Microsoft.Json.Schema.ToDotNet", "0.22.0.0")]
     public interface IRule
     {
         /// <summary>
@@ -34,14 +34,14 @@ namespace Microsoft.CodeAnalysis.Sarif
         string FullDescription { get; }
 
         /// <summary>
-        /// A dictionary consisting of a set of name/value pairs with arbitrary names. Describes the set of configurable options supported by the rule. The value within each name/value pair shall be a string, which may be the empty string. The value shall not be a dictionary or sub-object.
-        /// </summary>
-        IDictionary<string, string> Options { get; }
-
-        /// <summary>
         /// A set of name/value pairs with arbitrary names. The value within each name/value pair shall consist of plain text interspersed with placeholders, which can be used to format a message in combination with an arbitrary number of additional string arguments.
         /// </summary>
         IDictionary<string, string> MessageFormats { get; }
+
+        /// <summary>
+        /// A value specifying the default severity level of the notification.
+        /// </summary>
+        ResultLevel DefaultLevel { get; }
 
         /// <summary>
         /// A URI where the primary documentation for the rule can be found.
@@ -56,6 +56,6 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// <summary>
         /// A set of distinct strings that provide additional information about the rule.
         /// </summary>
-        ISet<string> Tags { get; }
+        IList<string> Tags { get; }
     }
 }

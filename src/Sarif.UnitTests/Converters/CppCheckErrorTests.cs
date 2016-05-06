@@ -38,8 +38,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
             Result result = new CppCheckError("id", "message", "verbose", "style", _dummyLocations)
                 .ToSarifIssue();
             Assert.AreEqual("id", result.RuleId);
-            Assert.AreEqual("message", result.ShortMessage);
-            Assert.AreEqual("verbose", result.FullMessage);
+            Assert.AreEqual("verbose", result.Message);
             result.Properties.Should().Equal(new Dictionary<string, string> { { "Severity", "style" } });
             Assert.AreEqual("file.cpp", result.Locations.First().ResultFile.Uri.ToString());
         }
@@ -51,17 +50,16 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
                 new CppCheckLocation("foo.cpp", 1234)
                 )).ToSarifIssue();
             Assert.AreEqual("id", result.RuleId);
-            Assert.AreEqual("message", result.ShortMessage);
-            Assert.AreEqual("verbose", result.FullMessage);
+            Assert.AreEqual("verbose", result.Message);
             result.Properties.Should().Equal(new Dictionary<string, string> { { "Severity", "my fancy severity" } });
-            result.Locations.Should().Equal(new[] { new Location {
+            result.Locations.SequenceEqual(new[] { new Location {
                     ResultFile = new PhysicalLocation
                     {
                         Uri = new Uri("foo.cpp", UriKind.RelativeOrAbsolute),
                         Region = new Region { StartLine = 1234 }
                     }
                 }
-            });
+            }, Location.ValueComparer).Should().BeTrue();
             Assert.IsNull(result.CodeFlows);
         }
 
@@ -72,31 +70,32 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
                 new CppCheckLocation("foo.cpp", 1234),
                 new CppCheckLocation("bar.cpp", 5678)
                 )).ToSarifIssue();
-            result.Locations.Should().Equal(new[] { new Location {
-                    ResultFile = new PhysicalLocation
-                    {
-                        Uri = new Uri("bar.cpp", UriKind.RelativeOrAbsolute),
-                        Region = new Region { StartLine = 5678 }
+
+            result.Locations.SequenceEqual(new[] { new Location {
+                        ResultFile = new PhysicalLocation
+                        {
+                            Uri = new Uri("bar.cpp", UriKind.RelativeOrAbsolute),
+                            Region = new Region { StartLine = 5678 }
+                        }
                     }
-                }
-            });
+                }, Location.ValueComparer).Should().BeTrue();
 
             Assert.AreEqual(1, result.CodeFlows.Count);
-            result.CodeFlows[0].Should().Equal(new[]
-                    {
-                        new AnnotatedCodeLocation {
-                            PhysicalLocation = new PhysicalLocation {
-                                Uri = new Uri("foo.cpp", UriKind.RelativeOrAbsolute),
-                                Region = new Region { StartLine = 1234 }
-                            } 
-                        },
-                        new AnnotatedCodeLocation {
-                            PhysicalLocation = new PhysicalLocation {
-                                Uri = new Uri("bar.cpp", UriKind.RelativeOrAbsolute),
-                                Region = new Region { StartLine = 5678 }
-                            }
+            result.CodeFlows.First().Locations.SequenceEqual(new[]
+                {
+                    new AnnotatedCodeLocation {
+                        PhysicalLocation = new PhysicalLocation {
+                            Uri = new Uri("foo.cpp", UriKind.RelativeOrAbsolute),
+                            Region = new Region { StartLine = 1234 }
                         }
-                    });
+                    },
+                    new AnnotatedCodeLocation {
+                        PhysicalLocation = new PhysicalLocation {
+                            Uri = new Uri("bar.cpp", UriKind.RelativeOrAbsolute),
+                            Region = new Region { StartLine = 5678 }
+                        }
+                    }
+                }, AnnotatedCodeLocation.ValueComparer).Should().BeTrue();
         }
 
         [TestMethod]
@@ -104,8 +103,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Converters
         {
             Result result = new CppCheckError("id", "message", "message", "style", _dummyLocations)
                 .ToSarifIssue();
-            Assert.IsNull(result.ShortMessage);
-            Assert.AreEqual("message", result.FullMessage);
+            Assert.AreEqual("message", result.Message);
         }
 
         [TestMethod]

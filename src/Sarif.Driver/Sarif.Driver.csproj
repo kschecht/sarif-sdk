@@ -2,6 +2,8 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{8CEAEA61-B1A2-4777-BCBE-C9A129A5F6C5}</ProjectGuid>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>Microsoft.CodeAnalysis.Sarif.Driver</RootNamespace>
@@ -27,34 +29,6 @@
   <ItemGroup>
     <Reference Include="CommandLine, Version=2.0.275.0, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
       <HintPath>..\packages\CommandLineParser.2.0.275-beta\lib\net45\CommandLine.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.Common.1.1.1\lib\net45\Microsoft.CodeAnalysis.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.1.1.1\lib\net45\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.CSharp.Workspaces, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.Workspaces.1.1.1\lib\net45\Microsoft.CodeAnalysis.CSharp.Workspaces.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.VisualBasic, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.VisualBasic.1.1.1\lib\net45\Microsoft.CodeAnalysis.VisualBasic.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.VisualBasic.Workspaces.1.1.1\lib\net45\Microsoft.CodeAnalysis.VisualBasic.Workspaces.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.Workspaces, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.Workspaces.Common.1.1.1\lib\net45\Microsoft.CodeAnalysis.Workspaces.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.Workspaces.Desktop, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.Workspaces.Common.1.1.1\lib\net45\Microsoft.CodeAnalysis.Workspaces.Desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -101,14 +75,17 @@
     <Compile Include="BrandedVersionAttribute.cs" />
     <Compile Include="DisposableEnumerable.cs" />
     <Compile Include="DisposableEnumerableView.cs" />
+    <Compile Include="DriverResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DriverResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="EnvironmentVariables.cs" />
     <Compile Include="ExceptionStrings.Designer.cs" />
     <Compile Include="Sdk\AggregatingLogger.cs" />
     <Compile Include="Sdk\AnalysisApplicability.cs" />
     <Compile Include="Sdk\AnalysisContext.cs" />
-    <Compile Include="Sdk\ConsoleLogger.cs" />
-    <Compile Include="Sdk\Errors.cs" />
     <Compile Include="Sdk\ExitApplicationException.cs" />
     <Compile Include="Sdk\ExitReason.cs" />
     <Compile Include="FileStreamExtensionMethods.cs" />
@@ -117,10 +94,7 @@
     <Compile Include="IEnvironmentVariables.cs" />
     <Compile Include="IFileSystem.cs" />
     <Compile Include="KeyEventImportance.cs" />
-    <Compile Include="LineInfo.cs" />
     <Compile Include="MurmurHash.cs" />
-    <Compile Include="NewLineIndex.cs" />
-    <Compile Include="OffsetInfo.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="PathExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,33 +109,10 @@
     <Compile Include="Sdk\ExportConfigurationOptions.cs" />
     <Compile Include="Sdk\ExportRulesMetadataCommandBase.cs" />
     <Compile Include="Sdk\ExportRulesMetadataOptions.cs" />
-    <Compile Include="Sdk\ExtensionMethods.cs" />
-    <Compile Include="Sdk\Hash.cs" />
-    <Compile Include="Sdk\IAnalysisContext.cs" />
-    <Compile Include="Sdk\IAnalyzeOptions.cs" />
-    <Compile Include="Sdk\IntegerSet.cs" />
-    <Compile Include="Sdk\IOption.cs" />
-    <Compile Include="Sdk\IOptionsProvider.cs" />
-    <Compile Include="Sdk\IAnalysisLogger.cs" />
     <Compile Include="Sdk\ISkimmer.cs" />
-    <Compile Include="Sdk\MessageUtilities.cs" />
-    <Compile Include="Sdk\Notes.cs" />
-    <Compile Include="Sdk\PerLanguageOption.cs" />
     <Compile Include="Sdk\PlugInDriverCommand.cs" />
-    <Compile Include="Sdk\PropertyBag.cs" />
-    <Compile Include="Sdk\PropertyBagExtensionMethods.cs" />
-    <Compile Include="Sdk\RuleUtilities.cs" />
-    <Compile Include="Sdk\RuntimeConditions.cs" />
-    <Compile Include="Sdk\SarifLogger.cs" />
-    <Compile Include="Sdk\SdkResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SdkResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Sdk\SkimmerBase.cs" />
     <Compile Include="Sdk\StatisticsLogger.cs" />
-    <Compile Include="Sdk\StringSet.cs" />
-    <Compile Include="Sdk\TypedPropertyBag.cs" />
     <Compile Include="SemanticVersion.cs" />
     <Compile Include="FileSpecifier.cs" />
     <Compile Include="StringExtensions.cs" />
@@ -173,11 +124,8 @@
   <ItemGroup>
     <EmbeddedResource Include="DriverResources.resx">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ExceptionStrings.resx" />
-    <EmbeddedResource Include="Sdk\SdkResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SdkResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>DriverResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -185,10 +133,6 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sarif\Sarif.csproj">

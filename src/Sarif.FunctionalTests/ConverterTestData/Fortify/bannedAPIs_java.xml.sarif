@@ -1,5 +1,6 @@
 {
-  "version": "1.0.0-beta.3",
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0-beta.4",
   "runs": [
     {
       "tool": {
@@ -15,7 +16,7 @@
       "results": [
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -35,7 +36,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextLong() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextLong() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -55,7 +56,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextGaussian() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextGaussian() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -75,7 +76,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextDouble() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextDouble() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -95,7 +96,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextFloat() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextFloat() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -115,7 +116,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextFloat() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextFloat() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -135,7 +136,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -155,7 +156,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextDouble() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextDouble() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -175,7 +176,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextGaussian() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextGaussian() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -195,7 +196,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextLong() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextLong() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -215,7 +216,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -235,7 +236,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextLong() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextLong() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -255,7 +256,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextDouble() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextDouble() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -275,7 +276,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -295,7 +296,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by next() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by next() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -315,7 +316,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextGaussian() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextGaussian() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -335,7 +336,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -355,7 +356,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextFloat() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextFloat() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -375,7 +376,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextLong() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextLong() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -395,7 +396,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -415,7 +416,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by random() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by random() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -435,7 +436,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -455,7 +456,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextInt() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -475,7 +476,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextGaussian() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextGaussian() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -495,7 +496,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextFloat() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextFloat() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -515,7 +516,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by next() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by next() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -535,7 +536,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by next() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by next() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -555,7 +556,7 @@
         },
         {
           "ruleId": "Insecure Randomness",
-          "fullMessage": "The random number generator implemented by nextDouble() cannot withstand a cryptographic attack.",
+          "message": "The random number generator implemented by nextDouble() cannot withstand a cryptographic attack.",
           "locations": [
             {
               "resultFile": {
@@ -575,7 +576,7 @@
         },
         {
           "ruleId": "Insecure Randomness: Poor Seed",
-          "fullMessage": "Random.setSeed should not be called with a constant integer argument.",
+          "message": "Random.setSeed should not be called with a constant integer argument.",
           "locations": [
             {
               "resultFile": {
@@ -595,7 +596,7 @@
         },
         {
           "ruleId": "Insecure Randomness: Poor Seed",
-          "fullMessage": "Random.setSeed should not be called with a constant integer argument.",
+          "message": "Random.setSeed should not be called with a constant integer argument.",
           "locations": [
             {
               "resultFile": {
@@ -615,7 +616,7 @@
         },
         {
           "ruleId": "Insecure Randomness: Poor Seed",
-          "fullMessage": "Random.setSeed should not be called with a constant integer argument.",
+          "message": "Random.setSeed should not be called with a constant integer argument.",
           "locations": [
             {
               "resultFile": {
@@ -635,7 +636,7 @@
         },
         {
           "ruleId": "Insecure Randomness: Poor Seed",
-          "fullMessage": "Random.setSeed should not be called with a constant integer argument.",
+          "message": "Random.setSeed should not be called with a constant integer argument.",
           "locations": [
             {
               "resultFile": {
@@ -655,7 +656,7 @@
         },
         {
           "ruleId": "Insecure Randomness: Poor Seed",
-          "fullMessage": "Random.setSeed should not be called with a constant integer argument.",
+          "message": "Random.setSeed should not be called with a constant integer argument.",
           "locations": [
             {
               "resultFile": {
