@@ -166,7 +166,7 @@ namespace Microsoft.CodeAnalysis.Sarif
         public static void LogMissingRuleConfiguration(IAnalysisContext context, string reasonForNotAnalyzing)
         {            
             Assembly assembly = Assembly.GetEntryAssembly();
-            assembly = assembly ?? Assembly.GetExecutingAssembly();
+            assembly = assembly ?? typeof(Errors).GetTypeInfo().Assembly;
             string exeName = Path.GetFileName(assembly.Location);
 
             // Check '{0}' was disabled while analyzing '{1}' because the analysis

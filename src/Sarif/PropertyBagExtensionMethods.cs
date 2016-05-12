@@ -231,7 +231,7 @@ namespace Microsoft.CodeAnalysis.Sarif
 
                 isEmptyItem = reader.IsEmptyElement;
                 reader.ReadStartElement();
-                item = reader.ReadString();
+                item = reader.ReadContentAsString();
                 set.Add(item);
                 if (!isEmptyItem) reader.ReadEndElement();
             }
@@ -273,6 +273,6 @@ namespace Microsoft.CodeAnalysis.Sarif
         private const string STRING_SET_ID = "StringSet";
         internal const string PROPERTIES_ID = "Properties";
 
-        private static HybridDictionary s_typesCache = new HybridDictionary();
+        private static Dictionary<string, Type> s_typesCache = new Dictionary<string, Type>();
     }
 }

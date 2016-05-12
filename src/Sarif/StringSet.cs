@@ -7,16 +7,10 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.Sarif
 {
-    [Serializable]
     public class StringSet : HashSet<string>
     {
         public StringSet() { }
 
         public StringSet(IEnumerable<string> strings) : base(strings) { }
-
-        protected StringSet(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
     }
 }

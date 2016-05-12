@@ -17,7 +17,7 @@ using Microsoft.CodeAnalysis.Sarif;
 
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(false)]
-[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)]
+[assembly: NeutralResourcesLanguage("en-US")]
 
 [assembly: AssemblyVersion(VersionConstants.FileVersion)]
 [assembly: AssemblyFileVersion(VersionConstants.FileVersion)]

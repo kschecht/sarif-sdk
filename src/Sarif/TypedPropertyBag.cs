@@ -7,7 +7,6 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.Sarif
 {
-    [Serializable]
     public class TypedPropertyBag<T> : Dictionary<string, T> where T : new()
     {
         public TypedPropertyBag() : this(null, StringComparer.Ordinal)
@@ -23,11 +22,6 @@ namespace Microsoft.CodeAnalysis.Sarif
                     this[key] = (T)initializer[key];
                 }
             }
-        }
-
-        protected TypedPropertyBag(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
         }
 
         protected Dictionary<string, string> SettingNameToDescriptionsMap { get; set; }

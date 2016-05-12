@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Sarif
     {
         public static Tool CreateFromAssemblyData(string prereleaseInfo = null)
         {
-            Assembly assembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly();
+            Assembly assembly = Assembly.GetEntryAssembly() ?? typeof(Tool).GetTypeInfo().Assembly;
             string name = Path.GetFileNameWithoutExtension(assembly.Location);
 
             Tool tool = new Tool();

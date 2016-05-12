@@ -9,6 +9,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis.Sarif.Readers;
 
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace Microsoft.CodeAnalysis.Sarif.Writers
 {
@@ -151,7 +152,7 @@ namespace Microsoft.CodeAnalysis.Sarif.Writers
         {
             tool.Properties = tool.Properties ?? new Dictionary<string, string>();
 
-            string sarifLoggerLocation = typeof(SarifLogger).Assembly.Location;
+            string sarifLoggerLocation = typeof(SarifLogger).GetTypeInfo().Assembly.Location;
 
             tool.Properties["SarifLoggerVersion"] = FileVersionInfo.GetVersionInfo(sarifLoggerLocation).FileVersion;
         }

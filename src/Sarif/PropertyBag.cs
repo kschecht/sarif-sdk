@@ -11,7 +11,6 @@ using System.Xml;
 
 namespace Microsoft.CodeAnalysis.Sarif
 {
-    [Serializable]
     public class PropertyBag : TypedPropertyBag<object>
     {
         internal const string DEFAULT_POLICY_NAME = "default";
@@ -22,11 +21,6 @@ namespace Microsoft.CodeAnalysis.Sarif
             PropertyBag initializer = null,
             IEqualityComparer<string> comparer = null)
             : base(initializer, comparer)
-        {
-        }
-
-        protected PropertyBag(SerializationInfo info, StreamingContext context)
-            : base(info, context)
         {
         }
 

@@ -23,14 +23,14 @@ namespace Microsoft.CodeAnalysis.Sarif
         /// </summary>
         /// <param name="stackTrace"></param>
         /// <returns></returns>
-        public static StackFrame Create(System.Diagnostics.StackFrame dotNetStackFrame)
+        public static StackFrame Create(StackFrame dotNetStackFrame)
         {
             // This value is -1 if not present
             int ilOffset = dotNetStackFrame.GetILOffset();
             string fileName = dotNetStackFrame.GetFileName();
             int nativeOffset = dotNetStackFrame.GetNativeOffset();
             MethodBase methodBase = dotNetStackFrame.GetMethod();
-            Assembly assembly = methodBase?.DeclaringType.Assembly;
+            Assembly assembly = methodBase?.DeclaringType.GetTypeInfo().Assembly;
             string fullyQualifiedName = CreateFullyQualifiedName(methodBase);
 
 

@@ -8,8 +8,7 @@ using System.Runtime.Serialization;
 namespace Microsoft.CodeAnalysis.Sarif
 {
     /// <summary>Information about an offset in a block of text.</summary>
-    [Serializable]
-    public struct OffsetInfo : IEquatable<OffsetInfo>, ISerializable
+    public struct OffsetInfo : IEquatable<OffsetInfo>
     {
         private readonly int _columnNumber;
         private readonly int _lineNumber;
@@ -48,13 +47,6 @@ namespace Microsoft.CodeAnalysis.Sarif
             _lineNumber = lineNumber;
         }
 
-        /// <summary>Initializes a new instance of the <see cref="OffsetInfo"/> struct.</summary>
-        /// <param name="info">The serialization info from which the value shall be deserialized.</param>
-        /// <param name="context">The streaming context from which the value shall be deserialized.</param>
-        private OffsetInfo(SerializationInfo info, StreamingContext context)
-            : this(info.GetInt32("ColumnNumber"), info.GetInt32("lineNumber"))
-        { }
-
         /// <summary>Tests if this object is considered equal to another.</summary>
         /// <param name="obj">Another object to compare to.</param>
         /// <returns>true if the objects are considered equal, false if they are not.</returns>
@@ -89,20 +81,6 @@ namespace Microsoft.CodeAnalysis.Sarif
         public override string ToString()
         {
             return String.Format(CultureInfo.InvariantCulture, "{0}:{1}", this.LineNumber, this.ColumnNumber);
-        }
-
-        /// <summary>Gets object data for serialization.</summary>
-        /// <param name="info">The serialization info into which the value shall be serialized.</param>
-        /// <param name="context">The streaming context into which the value shall be serialized.</param>
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (info == null)
-            {
-                throw new ArgumentNullException("info");
-            }
-
-            info.AddValue("ColumnNumber", this.ColumnNumber);
-            info.AddValue("LineNumber", this.LineNumber);
         }
 
         /// <summary>Equality operator.</summary>

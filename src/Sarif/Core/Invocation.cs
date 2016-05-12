@@ -16,17 +16,17 @@ namespace Microsoft.CodeAnalysis.Sarif
 
             invocation.StartTime = DateTime.UtcNow;
             invocation.ProcessId = System.Diagnostics.Process.GetCurrentProcess().Id;
-            invocation.WorkingDirectory = Environment.CurrentDirectory;
+            invocation.WorkingDirectory = System.IO.Directory.GetCurrentDirectory();
             invocation.CommandLine = Environment.CommandLine;
 
             if (emitMachineEnvironment)
             {
-                invocation.Machine = Environment.MachineName;
+                invocation.Machine = Environment.GetEnvironmentVariable("COMPUTERNAME");
                 invocation.Account = Environment.UserName;
                 invocation.EnvironmentVariables = CopyEnvironmentVariables();
             }
 
-            Assembly assembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly();
+            Assembly assembly = Assembly.GetEntryAssembly() ?? typeof(Invocation).GetTypeInfo().Assembly;
             invocation.FileName = assembly.Location;
 
             return invocation;
